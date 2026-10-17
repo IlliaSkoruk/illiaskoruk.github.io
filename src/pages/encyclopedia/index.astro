@@ -9,72 +9,81 @@ const hasModels = firearms.length > 0;
 ---
 
 <BaseLayout
-  title="Енциклопедія вогнепальної зброї — Firearms Explorer"
-  description="Систематизований каталог, класифікація та конструктивні особливості історичних і сучасних зразків вогнепальної зброї."
+  title="Сучасна стрілецька зброя — Firearms Explorer"
+  description="Каталог сучасних пістолетів, карабінів, гвинтівок та інших стрілецьких систем. Моделі, виробники, платформи й перевірені технічні характеристики."
 >
-  <!-- 1. ВЕРХНЯ СЕКЦІЯ (HERO РІВНЯ РОЗДІЛУ) -->
-  <section class="encyclopedia-header-section" aria-labelledby="page-title">
+  <!-- 1. ВЕРХНЯ HERO-СЕКЦІЯ РОЗДІЛУ (Dark Tactical Canvas) -->
+  <section class="encyclopedia-header" aria-labelledby="page-title">
     <div class="container">
-      <div class="header-content">
-        <div class="section-kicker" aria-hidden="true">
-          <span class="kicker-line"></span>
-          <span>ЕНЦИКЛОПЕДІЯ</span>
+      <div class="header-inner">
+        <div class="header-kicker" aria-hidden="true">
+          <span class="kicker-bar"></span>
+          <span>FIREARMS EXPLORER / ЗБРОЯ</span>
         </div>
 
         <h1 id="page-title" class="page-title">
-          Енциклопедія вогнепальної зброї
+          Сучасна стрілецька зброя
         </h1>
 
         <p class="page-lead">
-          Систематизований архів та аналітичний каталог зразків озброєння. Досліджуйте історію появи,
-          конструктивні схеми, виробничі передумови та підтверджені технічні показники моделей різних епох.
+          Каталог сучасних пістолетів, карабінів, гвинтівок та інших стрілецьких систем.
+          Моделі, виробники, платформи й перевірені технічні характеристики в єдиному інформаційному просторі.
         </p>
 
-        <!-- Стриманий технічний декоративний елемент -->
-        <div class="header-spec-bar" aria-hidden="true">
-          <div class="spec-item">
-            <span class="spec-label">МЕТОДОЛОГІЯ</span>
-            <span class="spec-val">Першоджерела та патенти</span>
-          </div>
-          <div class="spec-divider"></div>
+        <!-- Інженерна панель ТТХ та статусу -->
+        <div class="spec-bar" aria-label="Параметри розділу">
           <div class="spec-item">
             <span class="spec-label">КЛАСИФІКАЦІЯ</span>
-            <span class="spec-val">6 базових категорій</span>
+            <span class="spec-val">6 функціональних класів</span>
           </div>
-          <div class="spec-divider"></div>
+          <div class="spec-divider" aria-hidden="true"></div>
+          <div class="spec-item">
+            <span class="spec-label">МЕТОДОЛОГІЯ</span>
+            <span class="spec-val">Документація виробників та патенти</span>
+          </div>
+          <div class="spec-divider" aria-hidden="true"></div>
           <div class="spec-item">
             <span class="spec-label">СТАТУС КАТАЛОГУ</span>
-            <span class="spec-val">{hasModels ? `Опубліковано ${firearms.length} моделей` : 'Наповнення бази знань'}</span>
+            <span class="spec-val spec-val-status">
+              {hasModels ? `Опубліковано ${firearms.length} моделей` : 'Підготовка до наповнення'}
+            </span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 2. СЕКЦІЯ КАТЕГОРІЙ -->
+  <!-- 2. СЕКЦІЯ КАТЕГОРІЙ (Light Editorial Canvas) -->
   <section class="categories-section" aria-labelledby="categories-heading">
     <div class="container">
       <div class="section-intro">
+        <div class="section-tag" aria-hidden="true">КЛАСИФІКАЦІЯ СИСТЕМ</div>
         <h2 id="categories-heading" class="section-title">
-          Досліджуйте за категоріями
+          Категорії зброї
         </h2>
         <p class="section-desc">
-          Систематизація зразків за конструктивними ознаками та призначенням дозволяє простежити еволюцію
-          інженерних рішень від ранніх систем до сучасної високоточної автоматики.
+          Систематизація зразків за конструктивними ознаками та призначенням — від короткоствольної зброї самозахисту
+          до мобільних штурмових систем і високоточних комплексів підвищеної дальності.
         </p>
       </div>
 
       <div class="categories-grid">
         {
-          CATEGORIES.map((cat, index) => (
-            <div class="category-card surface">
+          CATEGORIES.map((cat) => (
+            <article class="category-card">
               <div class="category-card-top">
-                <span class="category-pill">Категорія</span>
-                <span class="category-index">0{index + 1}</span>
+                <span class="category-pill">Клас</span>
+                <span class="category-index">0{cat.order}</span>
               </div>
               <h3 class="category-title">{cat.name}</h3>
               <p class="category-description">{cat.description}</p>
-            </div>
+              {cat.note && (
+                <div class="category-note">
+                  <span class="note-bullet" aria-hidden="true">↳</span>
+                  <span>{cat.note}</span>
+                </div>
+              )}
+            </article>
           ))
         }
       </div>
@@ -85,11 +94,13 @@ const hasModels = firearms.length > 0;
   <section class="catalog-section" aria-labelledby="catalog-heading">
     <div class="container">
       <div class="section-intro">
+        <div class="section-tag" aria-hidden="true">БАЗА ЗНАНЬ</div>
         <h2 id="catalog-heading" class="section-title">
           Каталог моделей
         </h2>
         <p class="section-desc">
-          Структурована база знань із детальними паспортами зразків, технічними параметрами та переліком першоджерел.
+          Структурована база знань із детальними паспортами зразків, технічними параметрами,
+          відомостями про сумісність та переліком першоджерел.
         </p>
       </div>
 
@@ -97,7 +108,7 @@ const hasModels = firearms.length > 0;
         hasModels ? (
           <div class="models-grid">
             {firearms.map((item) => (
-              <article class="model-card surface">
+              <article class="model-card">
                 <div class="model-card-header">
                   <span class="model-category">{item.data.category}</span>
                   {item.data.introducedYear && (
@@ -113,21 +124,24 @@ const hasModels = firearms.length > 0;
             ))}
           </div>
         ) : (
-          /* Елегантний порожній стан на основі реальних даних колекції */
-          <div class="empty-state-card surface">
+          /* Динамічний порожній стан для Firearms Explorer 3.0 */
+          <div class="empty-state-card" role="status">
             <div class="empty-state-badge" aria-hidden="true">
-              АРХІВНЕ ОПРАЦЮВАННЯ
+              ЕТАП НАПОВНЕННЯ
             </div>
-            <h3 class="empty-state-title">Каталог на стадії наповнення</h3>
+            <h3 class="empty-state-title">Каталог сучасних моделей готується до наповнення</h3>
             <p class="empty-state-text">
-              Каталог поступово наповнюється перевіреними матеріалами. Незабаром тут з'являться енциклопедичні сторінки моделей.
+              Незабаром тут з'являться перевірені матеріали про актуальні стрілецькі платформи,
+              їхні модифікації, задокументовані характеристики та серійні зразки.
             </p>
             <div class="empty-state-meta" aria-hidden="true">
-              <span class="meta-tag">Верифікація джерел</span>
-              <span class="meta-sep">•</span>
-              <span class="meta-tag">Атрибутовані характеристики</span>
-              <span class="meta-sep">•</span>
-              <span class="meta-tag">Історичний контекст</span>
+              <span class="meta-tag">Верифікація специфікацій</span>
+              <span class="meta-sep">·</span>
+              <span class="meta-tag">Сумісність платформ</span>
+              <span class="meta-sep">·</span>
+              <span class="meta-tag">Документальні джерела</span>
+              <span class="meta-sep">·</span>
+              <span class="meta-tag">Офіційні мануали</span>
             </div>
           </div>
         )
@@ -138,90 +152,98 @@ const hasModels = firearms.length > 0;
 
 <style>
   /* ==========================================================================
-     1. ВЕРХНЯ СЕКЦІЯ РОЗДІЛУ
+     1. HERO РОЗДІЛУ (Dark Tactical Canvas)
      ========================================================================== */
-  .encyclopedia-header-section {
-    padding-top: clamp(2.5rem, 5vw, 4.5rem);
-    padding-bottom: clamp(2.5rem, 5vw, 4rem);
-    border-bottom: 1px solid var(--color-border);
-    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+  .encyclopedia-header {
+    background-color: var(--color-dark-canvas);
+    border-bottom: 1px solid var(--color-dark-border);
+    padding-top: clamp(3rem, 6vw, 4.5rem);
+    padding-bottom: clamp(3rem, 6vw, 4.5rem);
   }
 
-  .header-content {
-    max-width: 820px;
+  .header-inner {
+    max-width: 860px;
   }
 
-  .section-kicker {
+  .header-kicker {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: var(--text-xs);
+    gap: 0.625rem;
     font-family: var(--font-mono);
+    font-size: var(--text-xs);
     font-weight: var(--weight-bold);
-    letter-spacing: 0.08em;
-    color: var(--color-accent);
-    margin-bottom: var(--space-xs);
+    letter-spacing: 0.1em;
+    color: var(--color-dark-text-secondary);
+    margin-bottom: var(--space-sm);
   }
 
-  .kicker-line {
-    width: 20px;
+  .kicker-bar {
+    width: 22px;
     height: 2px;
-    background-color: var(--color-accent);
+    background-color: var(--color-amber);
     display: inline-block;
+    flex-shrink: 0;
   }
 
   .page-title {
-    font-size: var(--text-4xl);
-    line-height: 1.15;
-    letter-spacing: -0.025em;
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--color-dark-text);
     margin-top: 0;
     margin-bottom: var(--space-sm);
   }
 
   .page-lead {
-    font-size: var(--text-lg);
-    line-height: var(--leading-normal);
-    color: var(--color-text-secondary);
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: var(--leading-relaxed);
+    color: var(--color-dark-text-secondary);
+    margin-top: 0;
     margin-bottom: var(--space-xl);
+    max-width: 720px;
   }
 
-  /* Стриманий технічний інформаційний рядок */
-  .header-spec-bar {
+  /* Інженерна плашка специфікацій */
+  .spec-bar {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-sm) var(--space-md);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-sm);
+    background-color: var(--color-dark-surface);
+    border: 1px solid var(--color-dark-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-dark-sm);
   }
 
   .spec-item {
     display: flex;
     flex-direction: column;
-    gap: 0.125rem;
+    gap: 0.2rem;
   }
 
   .spec-label {
-    font-size: var(--text-xs);
+    font-size: 0.6875rem;
     font-family: var(--font-mono);
-    color: var(--color-text-muted);
-    letter-spacing: 0.05em;
+    color: var(--color-dark-text-muted);
+    letter-spacing: 0.08em;
   }
 
   .spec-val {
     font-size: var(--text-sm);
     font-weight: var(--weight-semibold);
-    color: var(--color-text);
+    color: var(--color-dark-text);
+  }
+
+  .spec-val-status {
+    color: var(--color-amber-light);
   }
 
   .spec-divider {
     display: none;
     width: 1px;
     height: 28px;
-    background-color: var(--color-border-subtle);
+    background-color: var(--color-dark-border);
   }
 
   @media (min-width: 640px) {
@@ -231,11 +253,12 @@ const hasModels = firearms.length > 0;
   }
 
   /* ==========================================================================
-     2. СЕКЦІЯ КАТЕГОРІЙ
+     2. СЕКЦІЯ КАТЕГОРІЙ (Light Editorial Canvas)
      ========================================================================== */
   .categories-section {
-    padding-top: clamp(3rem, 6vw, 4.5rem);
-    padding-bottom: clamp(3rem, 6vw, 4.5rem);
+    background-color: var(--color-bg);
+    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
   }
 
   .section-intro {
@@ -243,9 +266,19 @@ const hasModels = firearms.length > 0;
     margin-bottom: clamp(2rem, 4vw, 3rem);
   }
 
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-2xs);
+  }
+
   .section-title {
     font-size: var(--text-3xl);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
+    color: var(--color-text);
     margin-top: 0;
     margin-bottom: var(--space-xs);
   }
@@ -280,14 +313,15 @@ const hasModels = firearms.length > 0;
     flex-direction: column;
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     padding: clamp(1.25rem, 2.5vw, 1.75rem);
     box-shadow: var(--shadow-sm);
-    transition: border-color 0.15s ease;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
 
   .category-card:hover {
-    border-color: var(--color-border-strong);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
   }
 
   .category-card-top {
@@ -301,14 +335,16 @@ const hasModels = firearms.length > 0;
     font-size: var(--text-xs);
     font-weight: var(--weight-medium);
     color: var(--color-accent);
-    background-color: rgba(72, 97, 84, 0.08);
+    background-color: var(--color-accent-muted);
     padding: 0.15rem 0.5rem;
     border-radius: var(--radius-sm);
+    letter-spacing: 0.02em;
   }
 
   .category-index {
     font-family: var(--font-mono);
     font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
     color: var(--color-text-muted);
   }
 
@@ -325,25 +361,46 @@ const hasModels = firearms.length > 0;
     color: var(--color-text-secondary);
     line-height: var(--leading-normal);
     margin: 0;
+    flex-grow: 1;
+  }
+
+  .category-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.375rem;
+    margin-top: var(--space-sm);
+    padding-top: var(--space-xs);
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.45;
+  }
+
+  .note-bullet {
+    color: var(--color-accent);
+    flex-shrink: 0;
+    font-weight: var(--weight-bold);
   }
 
   /* ==========================================================================
      3. СЕКЦІЯ КАТАЛОГУ ТА ПОРОЖНІЙ СТАН
      ========================================================================== */
   .catalog-section {
-    padding-top: clamp(2rem, 5vw, 3.5rem);
-    padding-bottom: clamp(3.5rem, 7vw, 6rem);
+    background-color: var(--color-surface);
     border-top: 1px solid var(--color-border);
+    padding-top: clamp(3rem, 6vw, 4.5rem);
+    padding-bottom: clamp(3.5rem, 7vw, 6rem);
   }
 
   .empty-state-card {
     max-width: 760px;
     margin-inline: auto;
     text-align: center;
-    padding: clamp(2rem, 4vw, 3.5rem);
-    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface-subtle) 100%);
+    padding: clamp(2.25rem, 5vw, 3.75rem);
+    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
     border: 1px dashed var(--color-border-strong);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
   }
 
   .empty-state-badge {
@@ -351,14 +408,17 @@ const hasModels = firearms.length > 0;
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     font-weight: var(--weight-bold);
-    letter-spacing: 0.08em;
-    color: var(--color-accent);
+    letter-spacing: 0.1em;
+    color: var(--color-amber);
+    background-color: var(--color-amber-muted);
+    padding: 0.2rem 0.625rem;
+    border-radius: var(--radius-sm);
     margin-bottom: var(--space-sm);
   }
 
   .empty-state-title {
-    font-size: var(--text-2xl);
-    letter-spacing: -0.015em;
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    letter-spacing: -0.02em;
     margin-top: 0;
     margin-bottom: var(--space-xs);
     color: var(--color-text);
@@ -378,10 +438,10 @@ const hasModels = firearms.length > 0;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: var(--space-xs);
+    gap: 0.5rem;
     font-size: var(--text-xs);
     color: var(--color-text-muted);
-    font-family: var(--font-sans);
+    font-family: var(--font-mono);
   }
 
   .meta-tag {
@@ -392,7 +452,7 @@ const hasModels = firearms.length > 0;
     color: var(--color-border-strong);
   }
 
-  /* Сітка для майбутніх моделей */
+  /* Сітка для опублікованих моделей */
   .models-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -409,5 +469,51 @@ const hasModels = firearms.length > 0;
     .models-grid {
       grid-template-columns: repeat(3, 1fr);
     }
+  }
+
+  .model-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .model-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xs);
+  }
+
+  .model-category {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    color: var(--color-accent);
+  }
+
+  .model-year {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+  }
+
+  .model-title {
+    font-size: var(--text-xl);
+    color: var(--color-text);
+    margin: 0 0 var(--space-2xs);
+  }
+
+  .model-original-name {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-xs);
+  }
+
+  .model-summary {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin: 0;
   }
 </style>
