@@ -1,0 +1,317 @@
+---
+const navItems = [
+  { label: 'Енциклопедія', href: '/encyclopedia/' },
+  { label: 'Історія', href: '/history/' },
+  { label: 'Технології', href: '/technology/' },
+  { label: 'Словник', href: '/glossary/' },
+  { label: 'Безпека та право', href: '/safety-and-law/' },
+];
+
+const pathname = Astro.url.pathname;
+const normalizedPath = pathname.endsWith('/') ? pathname : `${pathname}/`;
+
+function isActive(href: string): boolean {
+  if (href === '/') {
+    return normalizedPath === '/';
+  }
+  return normalizedPath.startsWith(href);
+}
+---
+
+<header class="site-header">
+  <div class="header-inner container">
+    <a href="/" class="site-logo" aria-label="Firearms Explorer — на головну сторінку">
+      Firearms Explorer
+    </a>
+
+    <!-- Десктопна навігація -->
+    <nav class="desktop-nav" aria-label="Основна навігація сайту">
+      <ul class="nav-list">
+        {
+          navItems.map((item) => {
+            const active = isActive(item.href);
+            return (
+              <li class="nav-item">
+                <a
+                  href={item.href}
+                  class:list={['nav-link', { active }]}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+
+    <!-- Мобільна навігація (нативний <details>/<summary>) -->
+    <details class="mobile-nav" id="mobile-nav-details">
+      <summary class="mobile-toggle" aria-label="Меню навігації">
+        <span class="toggle-text">Меню</span>
+        <svg
+          class="toggle-icon-svg"
+          width="18"
+          height="18"
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <line x1="3" y1="5" x2="17" y2="5" class="line-top"></line>
+          <line x1="3" y1="10" x2="17" y2="10" class="line-mid"></line>
+          <line x1="3" y1="15" x2="17" y2="15" class="line-bot"></line>
+        </svg>
+      </summary>
+
+      <div class="mobile-dropdown">
+        <nav aria-label="Мобільна навігація">
+          <ul class="mobile-nav-list">
+            {
+              navItems.map((item) => {
+                const active = isActive(item.href);
+                return (
+                  <li class="mobile-nav-item">
+                    <a
+                      href={item.href}
+                      class:list={['mobile-nav-link', { active }]}
+                      aria-current={active ? 'page' : undefined}
+                    >
+                      <span>{item.label}</span>
+                      {active && <span class="active-indicator" aria-hidden="true">Поточний</span>}
+                    </a>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </nav>
+      </div>
+    </details>
+  </div>
+</header>
+
+<script>
+  // Прогресивне покращення для зручності: закриття мобільного меню по Escape та кліку поза межами
+  const mobileNav = document.getElementById('mobile-nav-details') as HTMLDetailsElement | null;
+  if (mobileNav) {
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && mobileNav.open) {
+        mobileNav.open = false;
+        mobileNav.querySelector('summary')?.focus();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (mobileNav.open && !mobileNav.contains(event.target as Node)) {
+        mobileNav.open = false;
+      }
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.25rem;
+    position: relative;
+  }
+
+  /* Логотип */
+  .site-logo {
+    font-size: 1.25rem;
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    text-decoration: none;
+    padding: var(--space-2xs) 0;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.15s ease;
+  }
+
+  .site-logo:hover {
+    color: var(--color-accent);
+  }
+
+  .site-logo:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Десктопна навігація */
+  .desktop-nav {
+    display: none;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    margin: 0;
+  }
+
+  .nav-link {
+    display: inline-block;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.9375rem;
+    font-weight: var(--weight-medium);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+    background-color: var(--color-surface-subtle);
+  }
+
+  .nav-link.active {
+    color: var(--color-accent);
+    font-weight: var(--weight-semibold);
+    background-color: rgba(72, 97, 84, 0.08);
+  }
+
+  .nav-link:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  /* Мобільна навігація */
+  .mobile-nav {
+    display: block;
+    position: relative;
+  }
+
+  .mobile-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.9375rem;
+    font-weight: var(--weight-medium);
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .mobile-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-toggle:hover {
+    background-color: var(--color-surface-subtle);
+    border-color: var(--color-border-strong);
+  }
+
+  .mobile-toggle:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .toggle-icon-svg {
+    display: block;
+  }
+
+  /* Панель випадного мобільного меню */
+  .mobile-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: min(calc(100vw - 2rem), 320px);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-xs);
+    z-index: 101;
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-nav-item {
+    margin: 0;
+  }
+
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9375rem;
+    font-weight: var(--weight-medium);
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .mobile-nav-link:hover {
+    background-color: var(--color-surface-subtle);
+  }
+
+  .mobile-nav-link.active {
+    color: var(--color-accent);
+    font-weight: var(--weight-semibold);
+    background-color: rgba(72, 97, 84, 0.08);
+  }
+
+  .mobile-nav-link:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .active-indicator {
+    font-size: 0.75rem;
+    font-weight: var(--weight-regular);
+    color: var(--color-accent);
+    background-color: rgba(72, 97, 84, 0.12);
+    padding: 0.125rem 0.375rem;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Адаптивний перемикач на десктоп */
+  @media (min-width: 860px) {
+    .desktop-nav {
+      display: block;
+    }
+
+    .mobile-nav {
+      display: none;
+    }
+  }
+</style>
