@@ -32,7 +32,11 @@ const categoryLabel = categoryObj ? categoryObj.name : data.category;
     {data.manufacturer && (
       <div class="card-manufacturer">{data.manufacturer}</div>
     )}
-    <h3 class="card-title">{data.title}</h3>
+    <h3 class="card-title">
+      <a href={`/encyclopedia/${firearm.id}/`} class="card-title-link">
+        {data.title}
+      </a>
+    </h3>
     {data.originalName && data.originalName !== data.title && (
       <div class="card-original-name">{data.originalName}</div>
     )}
@@ -42,7 +46,7 @@ const categoryLabel = categoryObj ? categoryObj.name : data.category;
   <div class="card-footer">
     <div class="meta-row">
       <span class="meta-code" aria-hidden="true">ID: {firearm.id}</span>
-      <span class="meta-status">Верифіковано</span>
+      <span class="meta-status">Джерела: {data.sources.length}</span>
     </div>
   </div>
 </article>
@@ -131,6 +135,22 @@ const categoryLabel = categoryObj ? categoryObj.name : data.category;
     color: var(--color-text);
     margin-top: 0;
     margin-bottom: var(--space-2xs);
+  }
+
+  .card-title-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .card-title-link:hover {
+    color: var(--color-accent);
+  }
+
+  .card-title-link:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
   }
 
   .card-original-name {

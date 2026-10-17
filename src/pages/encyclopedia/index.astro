@@ -12,6 +12,21 @@ const sortedFirearms = firearms.sort((a, b) =>
   a.data.title.localeCompare(b.data.title, 'uk')
 );
 const hasModels = sortedFirearms.length > 0;
+
+function formatModelsCount(count: number): string {
+  const pr = new Intl.PluralRules('uk');
+  const rule = pr.select(count);
+  switch (rule) {
+    case 'one':
+      return `${count} модель`;
+    case 'few':
+      return `${count} моделі`;
+    case 'many':
+    case 'other':
+    default:
+      return `${count} моделей`;
+  }
+}
 ---
 
 <BaseLayout
@@ -51,7 +66,7 @@ const hasModels = sortedFirearms.length > 0;
           <div class="spec-item">
             <span class="spec-label">СТАТУС КАТАЛОГУ</span>
             <span class="spec-val spec-val-status">
-              {hasModels ? `Опубліковано ${sortedFirearms.length} моделей` : 'Підготовка до наповнення'}
+              {hasModels ? `Опубліковано ${formatModelsCount(sortedFirearms.length)}` : 'Підготовка до наповнення'}
             </span>
           </div>
         </div>
