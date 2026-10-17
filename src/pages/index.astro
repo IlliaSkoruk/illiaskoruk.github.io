@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Firearms Explorer — Інформаційно-освітня енциклопедія"
+  description="Науково-популярна енциклопедія про історію, конструктивні концепції та технології вогнепальної зброї."
+>
+  <div class="container-narrow section">
+    <header style="margin-bottom: var(--space-xl); text-align: left;">
+      <h1>Firearms Explorer</h1>
+      <p style="font-size: var(--text-lg); color: var(--color-text-secondary); margin-bottom: 0;">
+        Інформаційно-освітня вебенциклопедія про історію, моделі та технології вогнепальної зброї.
+      </p>
+    </header>
+
+    <!-- Тимчасовий блок для перевірки елементів дизайн-системи -->
+    <section class="surface" aria-labelledby="demo-heading">
+      <h2 id="demo-heading" style="margin-top: 0;">Демонстрація дизайн-системи</h2>
+      <p>
+        Цей блок демонструє візуальну основу вебсайту: спокійний музейний колорит, адаптивну типографіку
+        та комфортний міжрядковий інтервал для читання української кирилиці.
+      </p>
+
+      <h3>Підзаголовок рівня H3</h3>
+      <p>
+        Тут перевіряється вигляд звичайного тексту у поєднанні з <a href="#demo-heading">тестовим посиланням</a> для контролю контрастності,
+        підкреслення та станів наведення й фокусу.
+      </p>
+
+      <h4>Маркований список (H4)</h4>
+      <ul>
+        <li>Історичний розвиток та хронологія конструкторських шкіл</li>
+        <li>Принципи класифікації та механічні концепції</li>
+        <li>Перевірені першоджерела та архівні відомості</li>
+      </ul>
+
+      <p class="text-secondary" style="margin-bottom: 0; padding-top: var(--space-xs); border-top: 1px solid var(--color-border-subtle);">
+        Зразок додаткового тексту меншого кегля для підписів, метаданих і довідкових приміток.
+      </p>
+    </section>
+  </div>
+</BaseLayout>

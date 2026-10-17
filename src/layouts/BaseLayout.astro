@@ -1,0 +1,30 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Firearms Explorer',
+  description = 'Інформаційно-освітня вебенциклопедія про історію, моделі та технології вогнепальної зброї.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Перейти до основного вмісту</a>
+    <main id="main-content">
+      <slot />
+    </main>
+  </body>
+</html>
