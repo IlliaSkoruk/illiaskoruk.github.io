@@ -1,13 +1,6 @@
 ---
+import { navItems } from '../data/navigation';
 const currentYear = new Date().getFullYear();
-
-const navLinks = [
-  { label: 'Енциклопедія', href: '/encyclopedia/' },
-  { label: 'Історія', href: '/history/' },
-  { label: 'Технології', href: '/technology/' },
-  { label: 'Словник', href: '/glossary/' },
-  { label: 'Безпека та право', href: '/safety-and-law/' },
-];
 ---
 
 <footer class="site-footer">
@@ -20,7 +13,7 @@ const navLinks = [
           Firearms Explorer
         </a>
         <p class="footer-tagline">
-          Українськомовна інформаційна енциклопедія про історію, розвиток і технології вогнепальної зброї.
+          Сучасний інформаційний портал про стрілецьку зброю, аксесуари, технології, збройові платформи та оснащення сучасних армій.
         </p>
       </div>
 
@@ -30,7 +23,7 @@ const navLinks = [
         <nav aria-label="Навігація у підвалі сайту">
           <ul class="footer-nav-list">
             {
-              navLinks.map((item) => (
+              navItems.map((item) => (
                 <li class="footer-nav-item">
                   <a href={item.href} class="footer-nav-link">
                     {item.label}
@@ -46,9 +39,10 @@ const navLinks = [
       <div class="footer-col footer-disclaimer">
         <h3 class="footer-heading">Про ресурс</h3>
         <p class="footer-disclaimer-text">
-          Firearms Explorer має виключно інформаційний, історичний та освітній характер.
+          Firearms Explorer має виключно інформаційний та освітній характер.
           Матеріали ресурсу не є юридичною консультацією чи порадами практичного застосування;
           чинні правові вимоги та класифікацію слід перевіряти за офіційними джерелами відповідної юрисдикції.
+          Ресурс не є магазином і не здійснює продаж зброї чи аксесуарів.
         </p>
       </div>
     </div>

@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Платформи та сумісність — Firearms Explorer"
+  description="Довідник збройових платформ та стандартів сумісності: AR-15, Glock, SIG P320, AK, M-LOK, Picatinny, optic footprints та матриці сумісності аксесуарів."
+>
+  <div class="container section-page">
+    <header class="page-header">
+      <h1 class="page-title">Платформи та сумісність</h1>
+      <p class="page-intro">
+        Систематизовані дані про збройові платформи, стандарти монтажних інтерфейсів
+        та матриці сумісності. Відповідь на питання: чи підійде конкретний аксесуар
+        до вашої платформи без адаптерів.
+      </p>
+    </header>
+
+    <div class="wip-block" role="status" aria-label="Розділ у розробці">
+      <div class="wip-inner">
+        <span class="wip-icon" aria-hidden="true">🔧</span>
+        <div>
+          <p class="wip-title">Розділ у розробці</p>
+          <p class="wip-text">
+            Довідники платформ і таблиці сумісності готуються. Тут з'являться детальні порівняння
+            стандартів M-LOK, Picatinny і KeyMod, посадкових місць для прицілів (optic footprints)
+            та огляди ключових збройових платформ.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <section class="preview-categories">
+      <h2 class="preview-heading">Що буде в цьому розділі</h2>
+      <ul class="preview-list">
+        <li>Платформа AR-15 / M4 / AR-10 — Mil-Spec та комерційні стандарти</li>
+        <li>Система Glock Gen 1–5 та модульні конфігурації</li>
+        <li>Платформи SIG Sauer: MCX, Spear (NGSW), P320, P365</li>
+        <li>Платформа AK та її варіації (AKM, AK-74, АК-12)</li>
+        <li>Стандарти цівок: M-LOK (Magpul), KeyMod, MIL-STD-1913 Picatinny</li>
+        <li>Посадкові місця прицілів: RMR, Shield RMSc, Aimpoint Acro, Docter/Noblex</li>
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .section-page {
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .page-header {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    max-width: 720px;
+  }
+
+  .page-title {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  .page-intro {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .wip-block {
+    background-color: var(--color-surface-subtle, #f5f4f0);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .wip-inner {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .wip-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .wip-title {
+    font-size: 1rem;
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    margin: 0 0 0.375rem;
+  }
+
+  .wip-text {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: var(--leading-normal);
+  }
+
+  .preview-categories {
+    max-width: 640px;
+  }
+
+  .preview-heading {
+    font-size: 1.125rem;
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  .preview-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .preview-list li {
+    padding-left: 1.25rem;
+    position: relative;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .preview-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: var(--weight-medium);
+  }
+</style>

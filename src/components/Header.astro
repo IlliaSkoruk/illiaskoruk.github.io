@@ -1,11 +1,5 @@
 ---
-const navItems = [
-  { label: 'Енциклопедія', href: '/encyclopedia/' },
-  { label: 'Історія', href: '/history/' },
-  { label: 'Технології', href: '/technology/' },
-  { label: 'Словник', href: '/glossary/' },
-  { label: 'Безпека та право', href: '/safety-and-law/' },
-];
+import { navItems } from '../data/navigation';
 
 const pathname = Astro.url.pathname;
 const normalizedPath = pathname.endsWith('/') ? pathname : `${pathname}/`;
@@ -141,6 +135,7 @@ function isActive(href: string): boolean {
     display: inline-flex;
     align-items: center;
     transition: color 0.15s ease;
+    flex-shrink: 0;
   }
 
   .site-logo:hover {
@@ -161,7 +156,7 @@ function isActive(href: string): boolean {
   .nav-list {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.125rem;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -173,13 +168,14 @@ function isActive(href: string): boolean {
 
   .nav-link {
     display: inline-block;
-    padding: 0.5rem 0.875rem;
-    font-size: 0.9375rem;
+    padding: 0.5rem 0.625rem;
+    font-size: 0.875rem;
     font-weight: var(--weight-medium);
     color: var(--color-text-secondary);
     text-decoration: none;
     border-radius: var(--radius-sm);
     transition: color 0.15s ease, background-color 0.15s ease;
+    white-space: nowrap;
   }
 
   .nav-link:hover {
@@ -304,14 +300,22 @@ function isActive(href: string): boolean {
     border-radius: var(--radius-sm);
   }
 
-  /* Адаптивний перемикач на десктоп */
-  @media (min-width: 860px) {
+  /* Адаптивний перемикач — перехід на десктоп */
+  @media (min-width: 960px) {
     .desktop-nav {
       display: block;
     }
 
     .mobile-nav {
       display: none;
+    }
+  }
+
+  /* На середніх екранах зменшуємо відступи, щоб довгі назви вмістилися */
+  @media (min-width: 960px) and (max-width: 1199px) {
+    .nav-link {
+      padding: 0.5rem 0.5rem;
+      font-size: 0.8125rem;
     }
   }
 </style>

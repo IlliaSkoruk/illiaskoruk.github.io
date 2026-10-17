@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Армії та конфлікти — Firearms Explorer"
+  description="Штатна стрілецька зброя провідних армій світу: ЗСУ, США, ЦАХАЛ, НАТО. Документально підтверджені дані про застосування озброєння на основі відкритих джерел."
+>
+  <div class="container section-page">
+    <header class="page-header">
+      <h1 class="page-title">Армії та конфлікти</h1>
+      <p class="page-intro">
+        Структуровані дані про штатну стрілецьку зброю провідних армій світу та
+        документально підтверджене застосування озброєння в сучасних конфліктах.
+        Усі матеріали базуються виключно на відкритих джерелах (OSINT, офіційні звіти, патенти виробників).
+      </p>
+    </header>
+
+    <div class="wip-block" role="status" aria-label="Розділ у розробці">
+      <div class="wip-inner">
+        <span class="wip-icon" aria-hidden="true">🔧</span>
+        <div>
+          <p class="wip-title">Розділ у розробці</p>
+          <p class="wip-text">
+            Матеріали про армії та задокументовані кейси застосування готуються.
+            Тут з'являться перевірені дані про озброєння підрозділів ЗСУ, армії США,
+            ЦАХАЛ та збройних сил країн НАТО.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer-block" role="note">
+      <p class="disclaimer-text">
+        <strong>Важливо:</strong> усі матеріали цього розділу базуються виключно на публічних,
+        верифікованих та загальнодоступних джерелах. Ресурс не розголошує секретної тактичної
+        інформації та позицій діючих військових формувань.
+      </p>
+    </div>
+
+    <section class="preview-categories">
+      <h2 class="preview-heading">Що буде в цьому розділі</h2>
+      <ul class="preview-list">
+        <li>Збройні Сили України (ЗСУ, ССО) — штатна та додаткова стрілецька зброя</li>
+        <li>Армія та Корпус морської піхоти США — системи M4A1, HK416, SIG XM7 / NGSW</li>
+        <li>ЦАХАЛ (Армія оборони Ізраїлю) — TAR-21, Negev, Jericho та імпортовані системи</li>
+        <li>Збройні сили країн НАТО — уніфіковані та національні зразки</li>
+        <li>Документально зафіксовані кейси застосування зброї у сучасних конфліктах</li>
+        <li>Аналіз ефективності платформ на основі відкритих військових звітів</li>
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .section-page {
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .page-header {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    max-width: 720px;
+  }
+
+  .page-title {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  .page-intro {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .wip-block {
+    background-color: var(--color-surface-subtle, #f5f4f0);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    margin-bottom: var(--space-lg);
+  }
+
+  .wip-inner {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .wip-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .wip-title {
+    font-size: 1rem;
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    margin: 0 0 0.375rem;
+  }
+
+  .wip-text {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: var(--leading-normal);
+  }
+
+  /* Дисклеймер OSINT */
+  .disclaimer-block {
+    background-color: rgba(72, 97, 84, 0.06);
+    border: 1px solid rgba(72, 97, 84, 0.25);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    max-width: 720px;
+  }
+
+  .disclaimer-text {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: var(--leading-normal);
+  }
+
+  .preview-categories {
+    max-width: 640px;
+  }
+
+  .preview-heading {
+    font-size: 1.125rem;
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  .preview-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .preview-list li {
+    padding-left: 1.25rem;
+    position: relative;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .preview-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: var(--weight-medium);
+  }
+</style>
