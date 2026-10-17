@@ -1,43 +1,742 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const exploreSections = [
+  {
+    title: 'Енциклопедія',
+    href: '/encyclopedia/',
+    tag: 'Каталог моделей',
+    description:
+      'Каталог моделей, класифікація за типами й механізмами, верифіковані характеристики та історичний контекст.',
+    actionText: 'Дослідити моделі',
+  },
+  {
+    title: 'Історія',
+    href: '/history/',
+    tag: 'Хронологія та епохи',
+    description:
+      'Розвиток вогнепальної зброї від ранніх історичних зразків і ґнотових замків до інженерних рішень сьогодення.',
+    actionText: 'Читати історію',
+  },
+  {
+    title: 'Технології',
+    href: '/technology/',
+    tag: 'Інженерія та механіка',
+    description:
+      'Конструктивні принципи, робота систем замикання ствола, схеми автоматики та історія інженерних винаходів.',
+    actionText: 'Вивчити технології',
+  },
+  {
+    title: 'Словник',
+    href: '/glossary/',
+    tag: 'Термінологічний довідник',
+    description:
+      'Пояснення технічних та історичних термінів, маркувань, калібрів і позначень зрозумілою українською мовою.',
+    actionText: 'Відкрити терміни',
+  },
+  {
+    title: 'Безпека та право',
+    href: '/safety-and-law/',
+    tag: 'Відповідальність та норми',
+    description:
+      'Загальні принципи відповідального поводження, правовий контекст і перевірені посилання на офіційні джерела.',
+    actionText: 'Дізнатися про правила',
+  },
+];
+
+const principles = [
+  {
+    num: '01',
+    title: 'Історичний контекст',
+    description:
+      'Походження моделей, розвиток світових конструкторських шкіл, виробничі передумови та еволюція інженерної думки у різні епохи.',
+  },
+  {
+    num: '02',
+    title: 'Перевірена інформація',
+    description:
+      'Достовірні технічні показники, підтверджені першоджерела, архівні відомості, музейні записи та відкрите висвітлення історичних неточностей.',
+  },
+  {
+    num: '03',
+    title: 'Зручне дослідження',
+    description:
+      'Логічна класифікація, структуровані взаємозв’язки між моделями й поняттями та заплановане довідкове зіставлення зразків без суб’єктивних оцінок.',
+  },
+];
 ---
 
 <BaseLayout
-  title="Firearms Explorer — Інформаційно-освітня енциклопедія"
-  description="Науково-популярна енциклопедія про історію, конструктивні концепції та технології вогнепальної зброї."
+  title="Firearms Explorer — Історія, конструкція та еволюція вогнепальної зброї"
+  description="Сучасна україномовна інформаційно-освітня енциклопедія про історію розвитку, технічну класифікацію та інженерні концепції вогнепальної зброї."
 >
-  <div class="container-narrow section">
-    <header style="margin-bottom: var(--space-xl); text-align: left;">
-      <h1>Firearms Explorer</h1>
-      <p style="font-size: var(--text-lg); color: var(--color-text-secondary); margin-bottom: 0;">
-        Інформаційно-освітня вебенциклопедія про історію, моделі та технології вогнепальної зброї.
-      </p>
-    </header>
+  <!-- 1. HERO СЕКЦІЯ -->
+  <section class="hero-section" aria-labelledby="hero-title">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="hero-badge" aria-hidden="true">
+          <span class="badge-dot"></span>
+          <span>Інформаційно-освітня енциклопедія</span>
+        </div>
 
-    <!-- Тимчасовий блок для перевірки елементів дизайн-системи -->
-    <section class="surface" aria-labelledby="demo-heading">
-      <h2 id="demo-heading" style="margin-top: 0;">Демонстрація дизайн-системи</h2>
-      <p>
-        Цей блок демонструє візуальну основу вебсайту: спокійний музейний колорит, адаптивну типографіку
-        та комфортний міжрядковий інтервал для читання української кирилиці.
-      </p>
+        <h1 id="hero-title" class="hero-title">
+          Firearms Explorer
+        </h1>
 
-      <h3>Підзаголовок рівня H3</h3>
-      <p>
-        Тут перевіряється вигляд звичайного тексту у поєднанні з <a href="#demo-heading">тестовим посиланням</a> для контролю контрастності,
-        підкреслення та станів наведення й фокусу.
-      </p>
+        <p class="hero-subtitle">
+          Історія, конструкція та еволюція вогнепальної зброї
+        </p>
 
-      <h4>Маркований список (H4)</h4>
-      <ul>
-        <li>Історичний розвиток та хронологія конструкторських шкіл</li>
-        <li>Принципи класифікації та механічні концепції</li>
-        <li>Перевірені першоджерела та архівні відомості</li>
-      </ul>
+        <p class="hero-description">
+          Незалежний дослідницький ресурс, присвячений системному вивченню історії розвитку,
+          технічної класифікації, інженерних рішень та культурного контексту вогнепальної зброї.
+        </p>
 
-      <p class="text-secondary" style="margin-bottom: 0; padding-top: var(--space-xs); border-top: 1px solid var(--color-border-subtle);">
-        Зразок додаткового тексту меншого кегля для підписів, метаданих і довідкових приміток.
-      </p>
-    </section>
-  </div>
+        <div class="hero-actions">
+          <a href="/encyclopedia/" class="btn btn-primary">
+            <span>Дослідити енциклопедію</span>
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </a>
+          <a href="/history/" class="btn btn-secondary">
+            <span>Дізнатися про історію</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Декоративна інженерна сітка на CSS -->
+      <div class="hero-visual" aria-hidden="true">
+        <div class="blueprint-card">
+          <div class="blueprint-grid">
+            <div class="grid-crosshairs crosshair-tl"></div>
+            <div class="grid-crosshairs crosshair-tr"></div>
+            <div class="grid-crosshairs crosshair-bl"></div>
+            <div class="grid-crosshairs crosshair-br"></div>
+            <div class="blueprint-circle circle-outer"></div>
+            <div class="blueprint-circle circle-mid"></div>
+            <div class="blueprint-circle circle-inner"></div>
+            <div class="blueprint-line line-horizontal"></div>
+            <div class="blueprint-line line-vertical"></div>
+          </div>
+          <div class="blueprint-meta">
+            <span class="meta-tag">АРХІВНІ ДОСЛІДЖЕННЯ</span>
+            <span class="meta-code">DOC.FE-2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. СЕКЦІЯ ОСНОВНИХ РОЗДІЛІВ -->
+  <section class="sections-section" aria-labelledby="sections-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="sections-title" class="section-title">
+          Досліджуйте Firearms Explorer
+        </h2>
+        <p class="section-lead">
+          Матеріали сайту структуровано за п’ятьма ключовими тематичними напрямами для послідовного читання,
+          зручного пошуку та глибинного вивчення.
+        </p>
+      </div>
+
+      <div class="explore-grid">
+        {
+          exploreSections.map((item, index) => (
+            <article class:list={['explore-card', `explore-card-${index + 1}`]}>
+              <div class="card-top">
+                <span class="card-tag">{item.tag}</span>
+                <span class="card-number">0{index + 1}</span>
+              </div>
+              <h3 class="card-title">
+                <a href={item.href} class="card-title-link">
+                  {item.title}
+                </a>
+              </h3>
+              <p class="card-desc">{item.description}</p>
+              <div class="card-footer">
+                <a href={item.href} class="card-action">
+                  <span>{item.actionText}</span>
+                  <svg class="action-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. СЕКЦІЯ ПРО ЕНЦИКЛОПЕДІЮ (КОНЦЕПЦІЯ) -->
+  <section class="concept-section" aria-labelledby="concept-title">
+    <div class="container">
+      <div class="concept-header">
+        <div class="concept-label">РЕДАКЦІЙНІ ПРИНЦИПИ</div>
+        <h2 id="concept-title" class="concept-title">
+          Більше, ніж просто каталог моделей
+        </h2>
+        <p class="concept-lead">
+          Ми створюємо довідковий простір, де кожна модель розглядається як результат інженерного пошуку
+          свого часу, а не просто як сухий перелік механічних показників.
+        </p>
+      </div>
+
+      <div class="principles-grid">
+        {
+          principles.map((p) => (
+            <div class="principle-card">
+              <div class="principle-num">{p.num}</div>
+              <h3 class="principle-title">{p.title}</h3>
+              <p class="principle-desc">{p.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ЗАКЛЮЧНА СЕКЦІЯ -->
+  <section class="summary-section" aria-labelledby="summary-title">
+    <div class="container">
+      <div class="summary-card">
+        <div class="summary-badge">ВІДКРИТИЙ РЕСУРС</div>
+        <h2 id="summary-title" class="summary-title">
+          Знання, історія та технології в одному місці
+        </h2>
+        <p class="summary-text">
+          Firearms Explorer покликаний бути надійним академічним і просвітницьким орієнтиром для всіх,
+          хто цінує точні історичні свідчення, еволюцію конструкторської майстерності та культуру відповідального пізнання.
+        </p>
+        <div class="summary-actions">
+          <a href="/encyclopedia/" class="btn btn-primary">
+            <span>Перейти до каталогу моделей</span>
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </a>
+          <a href="/technology/" class="btn btn-secondary">
+            <span>Ознайомитися з технологіями</span>
+          </a>
+        </div>
+        <p class="summary-note">
+          Енциклопедія знаходиться на етапі активного формування та послідовно наповнюється перевіреними матеріалами.
+        </p>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  /* ==========================================================================
+     1. HERO СЕКЦІЯ
+     ========================================================================== */
+  .hero-section {
+    padding-top: clamp(2.5rem, 6vw, 5rem);
+    padding-bottom: clamp(2.5rem, 6vw, 4.5rem);
+    border-bottom: 1px solid var(--color-border);
+    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+  }
+
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  @media (min-width: 960px) {
+    .hero-container {
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: clamp(2rem, 5vw, 4rem);
+    }
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3125rem 0.75rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-secondary);
+    letter-spacing: 0.02em;
+    margin-bottom: var(--space-md);
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .hero-title {
+    font-size: var(--text-4xl);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: var(--space-xs);
+    color: var(--color-text);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-snug);
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-description {
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--color-text-secondary);
+    max-width: 620px;
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .btn-arrow {
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+
+  .btn:hover .btn-arrow {
+    transform: translateX(3px);
+  }
+
+  /* Декоративний інженерний план (чистий CSS) */
+  .hero-visual {
+    display: none;
+  }
+
+  @media (min-width: 960px) {
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .blueprint-card {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 1 / 1;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .blueprint-grid {
+    position: relative;
+    width: 100%;
+    height: 85%;
+    border: 1px dashed var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grid-crosshairs {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+  }
+
+  .grid-crosshairs::before,
+  .grid-crosshairs::after {
+    content: '';
+    position: absolute;
+    background-color: var(--color-border-strong);
+  }
+
+  .grid-crosshairs::before {
+    top: 5px;
+    left: 0;
+    width: 12px;
+    height: 2px;
+  }
+
+  .grid-crosshairs::after {
+    left: 5px;
+    top: 0;
+    width: 2px;
+    height: 12px;
+  }
+
+  .crosshair-tl { top: -6px; left: -6px; }
+  .crosshair-tr { top: -6px; right: -6px; }
+  .crosshair-bl { bottom: -6px; left: -6px; }
+  .crosshair-br { bottom: -6px; right: -6px; }
+
+  .blueprint-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(72, 97, 84, 0.2);
+  }
+
+  .circle-outer {
+    width: 75%;
+    height: 75%;
+    border-style: solid;
+  }
+
+  .circle-mid {
+    width: 50%;
+    height: 50%;
+    border-style: dashed;
+  }
+
+  .circle-inner {
+    width: 25%;
+    height: 25%;
+    background-color: rgba(72, 97, 84, 0.05);
+    border: 1px solid var(--color-accent);
+  }
+
+  .blueprint-line {
+    position: absolute;
+    background-color: rgba(72, 97, 84, 0.15);
+  }
+
+  .line-horizontal {
+    width: 90%;
+    height: 1px;
+  }
+
+  .line-vertical {
+    height: 90%;
+    width: 1px;
+  }
+
+  .blueprint-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-xs);
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+  }
+
+  .meta-tag {
+    letter-spacing: 0.05em;
+    font-weight: var(--weight-medium);
+  }
+
+  /* ==========================================================================
+     2. СЕКЦІЯ ОСНОВНИХ РОЗДІЛІВ
+     ========================================================================== */
+  .sections-section {
+    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .section-header {
+    text-align: left;
+    max-width: 720px;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .section-title {
+    font-size: var(--text-3xl);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-xs);
+  }
+
+  .section-lead {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin-bottom: 0;
+  }
+
+  .explore-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  @media (min-width: 640px) {
+    .explore-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .explore-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Останні дві картки на десктопі розташовані збалансовано */
+    .explore-card-4 {
+      grid-column: span 1;
+    }
+    .explore-card-5 {
+      grid-column: span 2;
+    }
+  }
+
+  .explore-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+  }
+
+  .explore-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+  }
+
+  .card-tag {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    color: var(--color-accent);
+    background-color: rgba(72, 97, 84, 0.08);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .card-number {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .card-title {
+    font-size: var(--text-xl);
+    letter-spacing: -0.015em;
+    margin-top: 0;
+    margin-bottom: var(--space-xs);
+  }
+
+  .card-title-link {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .card-title-link:hover {
+    color: var(--color-accent);
+  }
+
+  .card-title-link:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .card-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .card-footer {
+    padding-top: var(--space-xs);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .card-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.15s ease, gap 0.15s ease;
+  }
+
+  .card-action:hover {
+    color: var(--color-accent-hover);
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+
+  .card-action:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .action-icon {
+    display: inline-block;
+  }
+
+  /* ==========================================================================
+     3. СЕКЦІЯ ПРО ЕНЦИКЛОПЕДІЮ (КОНЦЕПЦІЯ)
+     ========================================================================== */
+  .concept-section {
+    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+  }
+
+  .concept-header {
+    max-width: 760px;
+    margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .concept-label {
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+  }
+
+  .concept-title {
+    font-size: var(--text-3xl);
+    letter-spacing: -0.02em;
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  .concept-lead {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin-bottom: 0;
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .principles-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .principle-card {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .principle-num {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  .principle-title {
+    font-size: var(--text-xl);
+    letter-spacing: -0.015em;
+    margin-top: 0;
+    margin-bottom: var(--space-xs);
+  }
+
+  .principle-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin-bottom: 0;
+  }
+
+  /* ==========================================================================
+     4. ЗАКЛЮЧНА СЕКЦІЯ
+     ========================================================================== */
+  .summary-section {
+    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-bottom: clamp(3.5rem, 7vw, 6rem);
+  }
+
+  .summary-card {
+    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface-subtle) 100%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: clamp(1.75rem, 4vw, 3rem);
+    text-align: center;
+    max-width: 860px;
+    margin-inline: auto;
+  }
+
+  .summary-badge {
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+  }
+
+  .summary-title {
+    font-size: var(--text-3xl);
+    letter-spacing: -0.02em;
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  .summary-text {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    max-width: 680px;
+    margin-inline: auto;
+    margin-bottom: var(--space-xl);
+  }
+
+  .summary-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .summary-note {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    line-height: var(--leading-normal);
+    max-width: 540px;
+    margin-inline: auto;
+    margin-bottom: 0;
+  }
+</style>
