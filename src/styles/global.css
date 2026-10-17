@@ -1,93 +1,136 @@
 /* ==========================================================================
-   Firearms Explorer — Базова дизайн-система (Крок 2)
-   Стиль: музейно-інформаційний, стриманий, редакційний
+   Firearms Explorer — Дизайн-система v3.0 · Modern Tactical Tech
+   Стиль: технологічний портал / Premium Editorial
+   Оновлено: КРОК 8 — Modern Tactical Tech Design System
    ========================================================================== */
 
 :root {
-  /* ------------------------------------------------------------------------
-     1. Кольорова система (Світла тема)
-     ------------------------------------------------------------------------ */
-  /* Фони та поверхні */
-  --color-bg: #F5F3EE;              /* Теплий світлий музейний фон */
-  --color-surface: #FFFFFF;         /* Чиста поверхня карток і блоків */
-  --color-surface-subtle: #ECE9E2;  /* Приглушена підкладка / другорядна поверхня */
+  /* =========================================================================
+     1. КОЛЬОРОВА СИСТЕМА
+     ========================================================================= */
 
-  /* Текст */
-  --color-text: #222D36;            /* Темний графіт — основний контрастний текст */
-  --color-text-secondary: #505F6C;  /* Другорядний текст (контраст > 5.5:1) */
-  --color-text-muted: #748390;      /* Допоміжний текст і підписи */
+  /* --- Темні поверхні (Header, Footer, темні секції) --- */
+  --color-dark-canvas:      #12161A; /* Головний темний графіт — Header/Footer bg */
+  --color-dark-surface:     #1A2026; /* Темні панелі й картки на темному тлі */
+  --color-dark-surface-2:   #222D36; /* Трохи світліший темний шар */
+  --color-dark-border:      #2E3842; /* Межі на темних поверхнях */
+  --color-dark-border-subtle: rgba(255, 255, 255, 0.08); /* Тонкі роздільники */
 
-  /* Акцент (стриманий оливковий) */
-  --color-accent: #486154;          /* Стриманий оливковий для посилань та акцентів */
-  --color-accent-hover: #35493F;    /* Глибший відтінок при наведенні */
-  --color-accent-text: #FFFFFF;     /* Текст на акцентному тлі */
-  --color-focus: #35493F;           /* Колір кільця фокусу (WCAG 2.2 AA) */
+  /* --- Темний текст (на темних поверхнях) --- */
+  --color-dark-text:        #F0EDE8; /* Основний текст на темному фоні */
+  --color-dark-text-secondary: #8B98A5; /* Другорядний текст на темному — Steel Grey */
+  --color-dark-text-muted:  #5C6A74; /* Заглушений текст на темному */
 
-  /* Межі та роздільники */
-  --color-border: #E0DDD5;          /* Основна межа для карток і панелей */
-  --color-border-subtle: #ECE9E2;   /* М'який роздільник */
-  --color-border-strong: #C4C0B5;   /* Посилена межа */
+  /* --- Світлі поверхні (основний контент, статті, каталоги) --- */
+  --color-bg:               #F4F3EF; /* Нейтральний теплий фон для контентних секцій */
+  --color-surface:          #FFFFFF; /* Поверхня карток, панелей */
+  --color-surface-subtle:   #EDECEA; /* Приглушена підкладка */
+  --color-surface-elevated: #FFFFFF; /* Піднята поверхня (тінь) */
 
-  /* ------------------------------------------------------------------------
-     2. Типографіка
-     ------------------------------------------------------------------------ */
-  /* Системний шрифт із якісною підтримкою української кирилиці */
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  /* --- Основний текст (на світлих поверхнях) --- */
+  --color-text:             #1E262D; /* Основний контрастний текст (> 12:1) */
+  --color-text-secondary:   #4E5D6A; /* Другорядний текст (> 5.5:1) */
+  --color-text-muted:       #7A8B96; /* Допоміжний, підписи */
 
-  /* Адаптивна шкала розмірів шрифтів (fluid typography) */
-  --text-xs: 0.75rem;                                           /* 12px */
-  --text-sm: 0.875rem;                                          /* 14px */
-  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);         /* 16px - 17px */
-  --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);        /* 18px - 20px */
-  --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);          /* 20px - 24px (H4) */
-  --text-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 1.875rem);       /* 24px - 30px (H3) */
-  --text-3xl: clamp(1.75rem, 1.5rem + 1.25vw, 2.375rem);       /* 28px - 38px (H2) */
-  --text-4xl: clamp(2.125rem, 1.75rem + 1.8vw, 3rem);          /* 34px - 48px (H1) */
+  /* --- Межі (на світлих поверхнях) --- */
+  --color-border:           #DDD9D3; /* Основна межа карток і панелей */
+  --color-border-subtle:    #E8E5DF; /* М'який роздільник */
+  --color-border-strong:    #BDB8AF; /* Виразна межа / hover */
+
+  /* --- Tactical Olive — стриманий основний акцент --- */
+  --color-accent:           #486154; /* Головний оливковий акцент */
+  --color-accent-hover:     #3A4F43; /* Глибший відтінок hover */
+  --color-accent-muted:     rgba(72, 97, 84, 0.10); /* Напівпрозорий фон бейджу */
+  --color-accent-muted-border: rgba(72, 97, 84, 0.25);
+  --color-accent-text:      #FFFFFF; /* Текст на оливковому фоні */
+  --color-accent-light:     #5A7A6A; /* Світліший відтінок для hover на темних поверхнях */
+
+  /* --- Safety Amber — точковий акцент (калібри, мітки, CTA) --- */
+  --color-amber:            #D96B27; /* Головний бурштиновий акцент */
+  --color-amber-hover:      #C25F20; /* Темніший hover */
+  --color-amber-light:      #E8843E; /* Для hover на темних поверхнях */
+  --color-amber-muted:      rgba(217, 107, 39, 0.12);
+  --color-amber-text:       #FFFFFF; /* Текст на бурштиновому фоні (перевірений контраст) */
+
+  /* --- Focus --- */
+  --color-focus:            #3A4F43; /* Кільце фокусу WCAG 2.2 AA */
+  --color-focus-dark:       #88B09D; /* Кільце фокусу на темних поверхнях */
+
+  /* --- Статуси --- */
+  --color-success:          #2D7A50;
+  --color-warning:          #D96B27;
+  --color-info:             #2E6CA4;
+
+  /* =========================================================================
+     2. ТИПОГРАФІКА
+     ========================================================================= */
+
+  /* Системний стек із відмінною підтримкою кирилиці */
+  --font-sans:  system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-mono:  ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+                "Courier New", monospace;
+
+  /* Fluid-типографіка через clamp() */
+  --text-xs:   0.75rem;                                           /* 12px */
+  --text-sm:   0.875rem;                                          /* 14px */
+  --text-base: clamp(1rem,   0.96rem  + 0.20vw, 1.0625rem);      /* 16-17px */
+  --text-lg:   clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);       /* 18-20px */
+  --text-xl:   clamp(1.25rem,  1.15rem + 0.50vw, 1.5rem);        /* 20-24px (H4) */
+  --text-2xl:  clamp(1.5rem,   1.35rem + 0.75vw, 1.875rem);      /* 24-30px (H3) */
+  --text-3xl:  clamp(1.75rem,  1.50rem + 1.25vw, 2.375rem);      /* 28-38px (H2) */
+  --text-4xl:  clamp(2.125rem, 1.75rem + 1.80vw, 3rem);          /* 34-48px (H1) */
 
   /* Міжрядковий інтервал */
-  --leading-tight: 1.25;
-  --leading-snug: 1.375;
-  --leading-normal: 1.65;
+  --leading-tight:   1.2;
+  --leading-snug:    1.35;
+  --leading-normal:  1.65;
   --leading-relaxed: 1.75;
 
   /* Насиченість */
-  --weight-regular: 400;
-  --weight-medium: 500;
+  --weight-regular:  400;
+  --weight-medium:   500;
   --weight-semibold: 600;
-  --weight-bold: 700;
+  --weight-bold:     700;
 
-  /* ------------------------------------------------------------------------
-     3. Відступи та розмітка (Spacing scale)
-     ------------------------------------------------------------------------ */
-  --space-3xs: 0.25rem;     /* 4px */
-  --space-2xs: 0.5rem;      /* 8px */
-  --space-xs: 0.75rem;      /* 12px */
-  --space-sm: 1rem;         /* 16px */
-  --space-md: 1.5rem;       /* 24px */
-  --space-lg: 2rem;         /* 32px */
-  --space-xl: 3rem;         /* 48px */
-  --space-2xl: 4.5rem;      /* 72px */
+  /* =========================================================================
+     3. ВІДСТУПИ (Spacing scale)
+     ========================================================================= */
+  --space-3xs:  0.25rem;   /* 4px  */
+  --space-2xs:  0.5rem;    /* 8px  */
+  --space-xs:   0.75rem;   /* 12px */
+  --space-sm:   1rem;      /* 16px */
+  --space-md:   1.5rem;    /* 24px */
+  --space-lg:   2rem;      /* 32px */
+  --space-xl:   3rem;      /* 48px */
+  --space-2xl:  4.5rem;    /* 72px */
 
-  --space-section: clamp(2.5rem, 5vw, 4.5rem); /* Адаптивний вертикальний відступ */
+  --space-section: clamp(2.5rem, 5vw, 4.5rem);
 
-  /* ------------------------------------------------------------------------
-     4. Контейнери
-     ------------------------------------------------------------------------ */
-  --container-max: 1240px;                     /* Основна максимальна ширина */
-  --container-narrow: 740px;                   /* Ширина для комфортного читання (~65-75 символів) */
-  --container-gutter: clamp(1rem, 3.5vw, 2rem);/* Адаптивні бокові поля */
+  /* =========================================================================
+     4. КОНТЕЙНЕРИ
+     ========================================================================= */
+  --container-max:    1240px;
+  --container-narrow: 740px;
+  --container-gutter: clamp(1rem, 3.5vw, 2rem);
 
-  /* ------------------------------------------------------------------------
-     5. Радіуси та тіні
-     ------------------------------------------------------------------------ */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  /* =========================================================================
+     5. РАДІУСИ ТА ТІНІ
+     ========================================================================= */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 1px 2px rgba(34, 45, 54, 0.04), 0 1px 3px rgba(34, 45, 54, 0.06);
-  --shadow-md: 0 4px 6px -1px rgba(34, 45, 54, 0.06), 0 2px 4px -2px rgba(34, 45, 54, 0.04);
+  /* Тіні для світлого контексту */
+  --shadow-sm:  0 1px 2px rgba(30, 38, 45, 0.05), 0 1px 3px rgba(30, 38, 45, 0.07);
+  --shadow-md:  0 4px 8px -1px rgba(30, 38, 45, 0.08), 0 2px 4px -2px rgba(30, 38, 45, 0.05);
+  --shadow-lg:  0 10px 24px -3px rgba(30, 38, 45, 0.12), 0 4px 8px -4px rgba(30, 38, 45, 0.08);
+
+  /* Тіні для темного контексту */
+  --shadow-dark-sm: 0 1px 3px rgba(0, 0, 0, 0.25);
+  --shadow-dark-md: 0 4px 12px rgba(0, 0, 0, 0.30);
 }
 
 /* ==========================================================================
@@ -121,7 +164,6 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 main {
@@ -135,8 +177,8 @@ main {
   position: absolute;
   top: -100px;
   left: var(--space-sm);
-  background-color: var(--color-accent);
-  color: var(--color-accent-text);
+  background-color: var(--color-amber);
+  color: var(--color-amber-text);
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--radius-sm);
   font-weight: var(--weight-semibold);
@@ -147,41 +189,45 @@ main {
 
 .skip-link:focus-visible {
   top: var(--space-sm);
-  outline: 3px solid var(--color-focus);
-  outline-offset: 2px;
+  outline: 3px solid var(--color-amber);
+  outline-offset: 3px;
 }
 
 /* ==========================================================================
-   Семантична типографіка
+   Типографіка — семантичні заголовки
    ========================================================================== */
 h1, h2, h3, h4, h5, h6 {
   color: var(--color-text);
   font-family: var(--font-sans);
   font-weight: var(--weight-bold);
   line-height: var(--leading-tight);
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   margin-top: 0;
   margin-bottom: var(--space-sm);
 }
 
 h1 {
   font-size: var(--text-4xl);
-  line-height: 1.15;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
 }
 
 h2 {
   font-size: var(--text-3xl);
+  letter-spacing: -0.025em;
   margin-top: var(--space-xl);
 }
 
 h3 {
   font-size: var(--text-2xl);
+  letter-spacing: -0.02em;
   margin-top: var(--space-lg);
 }
 
 h4 {
   font-size: var(--text-xl);
   font-weight: var(--weight-semibold);
+  letter-spacing: -0.015em;
   margin-top: var(--space-md);
 }
 
@@ -207,6 +253,13 @@ small,
   color: var(--color-text-muted);
 }
 
+/* Моноширинний для технічних параметрів */
+.text-mono {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  letter-spacing: 0.02em;
+}
+
 /* Посилання */
 a {
   color: var(--color-accent);
@@ -228,37 +281,46 @@ button:focus-visible {
   border-radius: var(--radius-sm);
 }
 
-/* Кнопки та посилання-дії */
+/* ==========================================================================
+   Кнопки — базова система
+   ========================================================================== */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   min-height: 44px;
-  padding: 0.625rem 1.25rem;
+  padding: 0.625rem 1.375rem;
   font-family: var(--font-sans);
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
   line-height: 1.25;
+  letter-spacing: 0.01em;
   text-decoration: none;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color     0.15s ease,
+    color            0.15s ease,
+    box-shadow       0.15s ease;
 }
 
+/* Primary — Amber accent (CTA на темних секціях) */
 .btn-primary {
-  background-color: var(--color-accent);
-  color: var(--color-accent-text);
-  border: 1px solid var(--color-accent);
+  background-color: var(--color-amber);
+  color: var(--color-amber-text);
+  border: 1px solid var(--color-amber);
 }
 
 .btn-primary:hover {
-  background-color: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
-  color: var(--color-accent-text);
+  background-color: var(--color-amber-hover);
+  border-color: var(--color-amber-hover);
+  color: var(--color-amber-text);
   text-decoration: none;
 }
 
+/* Secondary — нейтральний обведений (на світлому фоні) */
 .btn-secondary {
   background-color: var(--color-surface);
   color: var(--color-text);
@@ -272,12 +334,28 @@ button:focus-visible {
   text-decoration: none;
 }
 
+/* Secondary Ghost (на темному фоні) */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-dark-text);
+  border: 1px solid var(--color-dark-border);
+}
+
+.btn-ghost:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-dark-text);
+  text-decoration: none;
+}
+
 .btn:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 3px;
 }
 
-/* Списки */
+/* ==========================================================================
+   Списки
+   ========================================================================== */
 ul, ol {
   margin-top: 0;
   margin-bottom: var(--space-md);
@@ -295,7 +373,7 @@ li::marker {
 }
 
 /* ==========================================================================
-   Адаптивні контейнери та сітка
+   Контейнери та сітка
    ========================================================================== */
 .container {
   width: 100%;
@@ -316,8 +394,10 @@ li::marker {
 }
 
 /* ==========================================================================
-   Поверхні (карточки / блоки)
+   Поверхні — картки, блоки, панелі
    ========================================================================== */
+
+/* Світла поверхня (контент) */
 .surface {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -333,8 +413,93 @@ li::marker {
   padding: var(--space-md);
 }
 
+/* Темна поверхня (для темних секцій і карток) */
+.surface-dark {
+  background-color: var(--color-dark-surface);
+  border: 1px solid var(--color-dark-border);
+  border-radius: var(--radius-md);
+  padding: clamp(var(--space-md), 3vw, var(--space-lg));
+}
+
 /* ==========================================================================
-   Медіа та адаптивність
+   Базові токени для майбутніх компонентів каталогу
+   ========================================================================== */
+
+/* --- Картки моделей (майбутній каталог зброї) --- */
+/* Готові змінні; самі картки реалізуються в окремих кроках */
+:root {
+  --card-bg:            var(--color-surface);
+  --card-border:        var(--color-border);
+  --card-border-hover:  var(--color-accent);
+  --card-radius:        var(--radius-lg);
+  --card-shadow:        var(--shadow-sm);
+  --card-shadow-hover:  var(--shadow-md);
+  --card-padding:       clamp(1rem, 2.5vw, 1.5rem);
+
+  /* --- Бейджі категорій та сумісності --- */
+  --badge-accent-bg:    var(--color-accent-muted);
+  --badge-accent-color: var(--color-accent);
+  --badge-amber-bg:     var(--color-amber-muted);
+  --badge-amber-color:  var(--color-amber);
+
+  /* --- Таблиці характеристик (SpecTable) --- */
+  --spec-label-color:   var(--color-text-muted);
+  --spec-value-color:   var(--color-text);
+  --spec-value-font:    var(--font-mono);
+  --spec-row-alt-bg:    var(--color-surface-subtle);
+  --spec-border:        var(--color-border-subtle);
+}
+
+/* --- Клас мітки (badge) --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.55rem;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.03em;
+  border-radius: var(--radius-sm);
+  line-height: 1.5;
+}
+
+.badge-accent {
+  background-color: var(--badge-accent-bg);
+  color: var(--badge-accent-color);
+}
+
+.badge-amber {
+  background-color: var(--badge-amber-bg);
+  color: var(--color-amber);
+}
+
+.badge-mono {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+}
+
+/* --- Інформаційна панель (Notice) --- */
+.notice {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  border-left-width: 3px;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+
+.notice-accent {
+  background-color: var(--color-accent-muted);
+  border-color: var(--color-accent);
+}
+
+.notice-amber {
+  background-color: var(--color-amber-muted);
+  border-color: var(--color-amber);
+}
+
+/* ==========================================================================
+   Медіа
    ========================================================================== */
 img, svg, video {
   max-width: 100%;
@@ -342,7 +507,9 @@ img, svg, video {
   display: block;
 }
 
-/* Зменшення анімацій для користувачів із відповідними налаштуваннями */
+/* ==========================================================================
+   prefers-reduced-motion
+   ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

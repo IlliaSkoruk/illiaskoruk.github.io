@@ -42,7 +42,7 @@ function isActive(href: string): boolean {
 
     <!-- Мобільна навігація (нативний <details>/<summary>) -->
     <details class="mobile-nav" id="mobile-nav-details">
-      <summary class="mobile-toggle" aria-label="Меню навігації">
+      <summary class="mobile-toggle" aria-label="Відкрити меню навігації">
         <span class="toggle-text">Меню</span>
         <svg
           class="toggle-icon-svg"
@@ -55,9 +55,9 @@ function isActive(href: string): boolean {
           stroke-linecap="round"
           aria-hidden="true"
         >
-          <line x1="3" y1="5" x2="17" y2="5" class="line-top"></line>
-          <line x1="3" y1="10" x2="17" y2="10" class="line-mid"></line>
-          <line x1="3" y1="15" x2="17" y2="15" class="line-bot"></line>
+          <line x1="3" y1="5" x2="17" y2="5"></line>
+          <line x1="3" y1="10" x2="17" y2="10"></line>
+          <line x1="3" y1="15" x2="17" y2="15"></line>
         </svg>
       </summary>
 
@@ -75,7 +75,7 @@ function isActive(href: string): boolean {
                       aria-current={active ? 'page' : undefined}
                     >
                       <span>{item.label}</span>
-                      {active && <span class="active-indicator" aria-hidden="true">Поточний</span>}
+                      {active && <span class="active-dot" aria-hidden="true"></span>}
                     </a>
                   </li>
                 );
@@ -89,7 +89,7 @@ function isActive(href: string): boolean {
 </header>
 
 <script>
-  // Прогресивне покращення для зручності: закриття мобільного меню по Escape та кліку поза межами
+  // Закриття мобільного меню по Escape та кліку поза межами
   const mobileNav = document.getElementById('mobile-nav-details') as HTMLDetailsElement | null;
   if (mobileNav) {
     document.addEventListener('keydown', (event) => {
@@ -98,7 +98,6 @@ function isActive(href: string): boolean {
         mobileNav.querySelector('summary')?.focus();
       }
     });
-
     document.addEventListener('click', (event) => {
       if (mobileNav.open && !mobileNav.contains(event.target as Node)) {
         mobileNav.open = false;
@@ -108,47 +107,52 @@ function isActive(href: string): boolean {
 </script>
 
 <style>
+  /* =========================================================
+     Header — Dark Tactical Canvas
+     ========================================================= */
   .site-header {
-    background-color: var(--color-surface);
-    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-dark-canvas);
+    border-bottom: 1px solid var(--color-dark-border);
     position: sticky;
     top: 0;
     z-index: 100;
+    /* Тонка підсвітка знизу для відчуття глибини */
+    box-shadow: 0 1px 0 var(--color-dark-border), 0 2px 8px rgba(0, 0, 0, 0.18);
   }
 
   .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 4.25rem;
+    height: 4rem;
     position: relative;
   }
 
-  /* Логотип */
+  /* ---- Логотип ---- */
   .site-logo {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: var(--weight-bold);
-    letter-spacing: -0.02em;
-    color: var(--color-text);
+    letter-spacing: -0.03em;
+    color: var(--color-dark-text);
     text-decoration: none;
     padding: var(--space-2xs) 0;
     display: inline-flex;
     align-items: center;
-    transition: color 0.15s ease;
     flex-shrink: 0;
+    transition: color 0.15s ease;
   }
 
   .site-logo:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-light);
   }
 
   .site-logo:focus-visible {
-    outline: 2px solid var(--color-focus);
+    outline: 2px solid var(--color-focus-dark);
     outline-offset: 3px;
     border-radius: var(--radius-sm);
   }
 
-  /* Десктопна навігація */
+  /* ---- Десктопна навігація ---- */
   .desktop-nav {
     display: none;
   }
@@ -168,33 +172,35 @@ function isActive(href: string): boolean {
 
   .nav-link {
     display: inline-block;
-    padding: 0.5rem 0.625rem;
-    font-size: 0.875rem;
+    padding: 0.45rem 0.625rem;
+    font-size: 0.8125rem;
     font-weight: var(--weight-medium);
-    color: var(--color-text-secondary);
+    color: var(--color-dark-text-secondary);
     text-decoration: none;
     border-radius: var(--radius-sm);
-    transition: color 0.15s ease, background-color 0.15s ease;
     white-space: nowrap;
+    letter-spacing: 0.01em;
+    transition: color 0.15s ease, background-color 0.15s ease;
   }
 
   .nav-link:hover {
-    color: var(--color-text);
-    background-color: var(--color-surface-subtle);
+    color: var(--color-dark-text);
+    background-color: rgba(255, 255, 255, 0.06);
   }
 
   .nav-link.active {
-    color: var(--color-accent);
+    color: var(--color-amber-light);
     font-weight: var(--weight-semibold);
-    background-color: rgba(72, 97, 84, 0.08);
+    background-color: rgba(217, 107, 39, 0.10);
   }
 
   .nav-link:focus-visible {
-    outline: 2px solid var(--color-focus);
+    outline: 2px solid var(--color-focus-dark);
     outline-offset: 2px;
+    border-radius: var(--radius-sm);
   }
 
-  /* Мобільна навігація */
+  /* ---- Мобільна кнопка ---- */
   .mobile-nav {
     display: block;
     position: relative;
@@ -205,14 +211,14 @@ function isActive(href: string): boolean {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    min-height: 44px;
-    min-width: 44px;
-    padding: 0.5rem 0.875rem;
-    font-size: 0.9375rem;
+    min-height: 40px;
+    min-width: 40px;
+    padding: 0.45rem 0.875rem;
+    font-size: 0.875rem;
     font-weight: var(--weight-medium);
-    color: var(--color-text);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
+    color: var(--color-dark-text);
+    background-color: transparent;
+    border: 1px solid var(--color-dark-border);
     border-radius: var(--radius-sm);
     cursor: pointer;
     user-select: none;
@@ -225,30 +231,26 @@ function isActive(href: string): boolean {
   }
 
   .mobile-toggle:hover {
-    background-color: var(--color-surface-subtle);
-    border-color: var(--color-border-strong);
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.2);
   }
 
   .mobile-toggle:focus-visible {
-    outline: 2px solid var(--color-focus);
+    outline: 2px solid var(--color-focus-dark);
     outline-offset: 2px;
   }
 
-  .toggle-icon-svg {
-    display: block;
-  }
-
-  /* Панель випадного мобільного меню */
+  /* ---- Dropdown мобільного меню ---- */
   .mobile-dropdown {
     position: absolute;
     top: calc(100% + 0.5rem);
     right: 0;
-    width: min(calc(100vw - 2rem), 320px);
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
+    width: min(calc(100vw - 2rem), 300px);
+    background-color: var(--color-dark-surface);
+    border: 1px solid var(--color-dark-border);
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    padding: var(--space-xs);
+    box-shadow: var(--shadow-dark-md);
+    padding: var(--space-2xs);
     z-index: 101;
   }
 
@@ -267,55 +269,57 @@ function isActive(href: string): boolean {
     align-items: center;
     justify-content: space-between;
     min-height: 44px;
-    padding: 0.625rem 0.875rem;
+    padding: 0.5rem 0.875rem;
     font-size: 0.9375rem;
     font-weight: var(--weight-medium);
-    color: var(--color-text);
+    color: var(--color-dark-text-secondary);
     text-decoration: none;
     border-radius: var(--radius-sm);
     transition: background-color 0.15s ease, color 0.15s ease;
   }
 
   .mobile-nav-link:hover {
-    background-color: var(--color-surface-subtle);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--color-dark-text);
   }
 
   .mobile-nav-link.active {
-    color: var(--color-accent);
+    color: var(--color-amber-light);
     font-weight: var(--weight-semibold);
-    background-color: rgba(72, 97, 84, 0.08);
+    background-color: rgba(217, 107, 39, 0.08);
   }
 
   .mobile-nav-link:focus-visible {
-    outline: 2px solid var(--color-focus);
+    outline: 2px solid var(--color-focus-dark);
     outline-offset: 2px;
-  }
-
-  .active-indicator {
-    font-size: 0.75rem;
-    font-weight: var(--weight-regular);
-    color: var(--color-accent);
-    background-color: rgba(72, 97, 84, 0.12);
-    padding: 0.125rem 0.375rem;
     border-radius: var(--radius-sm);
   }
 
-  /* Адаптивний перемикач — перехід на десктоп */
+  .active-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-amber-light);
+    flex-shrink: 0;
+  }
+
+  /* ---- Breakpoint: десктоп (960px+) ---- */
   @media (min-width: 960px) {
     .desktop-nav {
       display: block;
     }
-
     .mobile-nav {
       display: none;
     }
   }
 
-  /* На середніх екранах зменшуємо відступи, щоб довгі назви вмістилися */
+  /* На проміжних екранах (960–1199px) трохи щільніші відступи */
   @media (min-width: 960px) and (max-width: 1199px) {
     .nav-link {
-      padding: 0.5rem 0.5rem;
-      font-size: 0.8125rem;
+      padding: 0.45rem 0.5rem;
+    }
+    .site-logo {
+      font-size: 1rem;
     }
   }
 </style>
