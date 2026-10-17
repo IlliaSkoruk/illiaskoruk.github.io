@@ -2,6 +2,7 @@ import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 import { CATEGORY_IDS } from './data/categories';
+import { ACCESSORY_CATEGORY_IDS } from './data/accessoryCategories';
 
 const sourceSchema = z.object({
   title: z.string().min(1, 'Назва джерела обов’язкова'),
@@ -34,4 +35,21 @@ const firearms = defineCollection({
   }),
 });
 
-export const collections = { firearms };
+const accessories = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/accessories' }),
+  schema: z.object({
+    title: z.string().min(1, 'Назва аксесуара обов’язкова'),
+    brand: z.string().min(1, 'Виробник або бренд обов’язковий'),
+    category: z.enum(ACCESSORY_CATEGORY_IDS),
+    summary: z.string().min(1, 'Короткий опис є обов’язковим'),
+    model: z.string().optional(),
+    countryOfOrigin: z.string().optional(),
+    introducedYear: z.number().int().optional(),
+    sources: z.array(sourceSchema).min(1, 'Опублікований запис повинен мати хоча б одне перевірене джерело'),
+    lastReviewedAt: z.coerce.date(),
+    draft: z.boolean().default(false),
+    image: imageSchema.optional(),
+  }),
+});
+
+export const collections = { firearms, accessories };
