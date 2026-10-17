@@ -1,0 +1,175 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCategoryById } from '../data/categories';
+
+interface Props {
+  firearm: CollectionEntry<'firearms'>;
+}
+
+const { firearm } = Astro.props;
+const { data } = firearm;
+
+const categoryObj = getCategoryById(data.category);
+const categoryLabel = categoryObj ? categoryObj.name : data.category;
+---
+
+<article class="firearm-card">
+  <div class="card-header">
+    <div class="card-badges">
+      <span class="badge-category">{categoryLabel}</span>
+      {data.countryOfOrigin && (
+        <span class="badge-country">{data.countryOfOrigin}</span>
+      )}
+    </div>
+    {data.introducedYear && (
+      <span class="badge-year" title="Рік появи / презентації">
+        {data.introducedYear} р.
+      </span>
+    )}
+  </div>
+
+  <div class="card-body">
+    {data.manufacturer && (
+      <div class="card-manufacturer">{data.manufacturer}</div>
+    )}
+    <h3 class="card-title">{data.title}</h3>
+    {data.originalName && data.originalName !== data.title && (
+      <div class="card-original-name">{data.originalName}</div>
+    )}
+    <p class="card-summary">{data.summary}</p>
+  </div>
+
+  <div class="card-footer">
+    <div class="meta-row">
+      <span class="meta-code" aria-hidden="true">ID: {firearm.id}</span>
+      <span class="meta-status">Верифіковано</span>
+    </div>
+  </div>
+</article>
+
+<style>
+  .firearm-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .firearm-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .badge-category {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    color: var(--color-accent);
+    background-color: var(--color-accent-muted);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.02em;
+  }
+
+  .badge-country {
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+    background-color: var(--color-surface-subtle);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .badge-year {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .card-manufacturer {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-amber);
+    margin-bottom: 0.25rem;
+  }
+
+  .card-title {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    color: var(--color-text);
+    margin-top: 0;
+    margin-bottom: var(--space-2xs);
+  }
+
+  .card-original-name {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xs);
+  }
+
+  .card-summary {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .card-footer {
+    margin-top: var(--space-md);
+    padding-top: var(--space-xs);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.6875rem;
+    font-family: var(--font-mono);
+  }
+
+  .meta-code {
+    color: var(--color-text-muted);
+    letter-spacing: 0.03em;
+  }
+
+  .meta-status {
+    color: var(--color-accent);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.04em;
+  }
+</style>
