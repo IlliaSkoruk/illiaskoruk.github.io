@@ -1,0 +1,235 @@
+---
+const currentYear = new Date().getFullYear();
+
+const navLinks = [
+  { label: 'Енциклопедія', href: '/encyclopedia/' },
+  { label: 'Історія', href: '/history/' },
+  { label: 'Технології', href: '/technology/' },
+  { label: 'Словник', href: '/glossary/' },
+  { label: 'Безпека та право', href: '/safety-and-law/' },
+];
+---
+
+<footer class="site-footer">
+  <div class="container footer-container">
+    <!-- Основна зона з трьома колонками -->
+    <div class="footer-main">
+      <!-- Зона A — Інформація про проєкт -->
+      <div class="footer-col footer-about">
+        <a href="/" class="footer-logo" aria-label="Firearms Explorer — на головну сторінку">
+          Firearms Explorer
+        </a>
+        <p class="footer-tagline">
+          Українськомовна інформаційна енциклопедія про історію, розвиток і технології вогнепальної зброї.
+        </p>
+      </div>
+
+      <!-- Зона B — Навігація -->
+      <div class="footer-col footer-nav-col">
+        <h3 class="footer-heading">Розділи сайту</h3>
+        <nav aria-label="Навігація у підвалі сайту">
+          <ul class="footer-nav-list">
+            {
+              navLinks.map((item) => (
+                <li class="footer-nav-item">
+                  <a href={item.href} class="footer-nav-link">
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Зона C — Інформаційний блок -->
+      <div class="footer-col footer-disclaimer">
+        <h3 class="footer-heading">Про ресурс</h3>
+        <p class="footer-disclaimer-text">
+          Firearms Explorer має виключно інформаційний, історичний та освітній характер.
+          Матеріали ресурсу не є юридичною консультацією чи порадами практичного застосування;
+          чинні правові вимоги та класифікацію слід перевіряти за офіційними джерелами відповідної юрисдикції.
+        </p>
+      </div>
+    </div>
+
+    <!-- Нижній рядок Footer -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p class="footer-copyright">
+          &copy; {currentYear} Firearms Explorer
+        </p>
+        <p class="footer-badge">
+          Інформаційно-освітній проєкт
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: #222D36;
+    color: #BAC3CA;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: auto;
+  }
+
+  .footer-container {
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    padding-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  /* Основна сітка з трьома зонами */
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    padding-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  @media (min-width: 640px) and (max-width: 959px) {
+    .footer-main {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-xl) var(--space-lg);
+    }
+
+    .footer-disclaimer {
+      grid-column: span 2;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .footer-main {
+      grid-template-columns: 1.25fr 0.85fr 1.35fr;
+      gap: clamp(2rem, 4vw, 4rem);
+    }
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Зона A — Логотип та слоган */
+  .footer-logo {
+    font-size: 1.25rem;
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: var(--space-xs);
+    transition: color 0.15s ease;
+  }
+
+  .footer-logo:hover {
+    color: #88B09D;
+  }
+
+  .footer-logo:focus-visible {
+    outline: 2px solid #88B09D;
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  .footer-tagline {
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: #BAC3CA;
+    margin: 0;
+    max-width: 340px;
+  }
+
+  /* Заголовки блоків B та C */
+  .footer-heading {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #FFFFFF;
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Зона B — Навігаційний список */
+  .footer-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .footer-nav-item {
+    margin: 0;
+  }
+
+  .footer-nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 0.25rem 0;
+    font-size: var(--text-sm);
+    color: #BAC3CA;
+    text-decoration: none;
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+
+  .footer-nav-link:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .footer-nav-link:focus-visible {
+    outline: 2px solid #88B09D;
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Зона C — Дисклеймер */
+  .footer-disclaimer-text {
+    font-size: var(--text-xs);
+    line-height: var(--leading-normal);
+    color: #9AA6AF;
+    margin: 0;
+  }
+
+  /* Нижній рядок */
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  .footer-bottom-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  @media (min-width: 640px) {
+    .footer-bottom-inner {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .footer-copyright {
+    font-size: var(--text-xs);
+    color: #8D98A1;
+    margin: 0;
+    font-family: var(--font-sans);
+  }
+
+  .footer-badge {
+    font-size: var(--text-xs);
+    color: #8D98A1;
+    margin: 0;
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+  }
+</style>

@@ -110,6 +110,8 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
@@ -120,6 +122,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+main {
+  flex: 1 0 auto;
 }
 
 /* ==========================================================================
