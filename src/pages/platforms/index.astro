@@ -1,145 +1,1273 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  PLATFORM_TAXONOMY,
+  PLATFORM_FAMILIES,
+  MECHANICAL_STANDARDS,
+  TECHNICAL_SOURCES,
+} from '../../data/platformOverview';
 ---
 
 <BaseLayout
   title="Платформи та сумісність — Firearms Explorer"
-  description="Довідник збройових платформ та стандартів сумісності: AR-15, Glock, SIG P320, AK, M-LOK, Picatinny, optic footprints та матриці сумісності аксесуарів."
+  description="Досліджуй сучасні збройові платформи, їхні сімейства, покоління та технічні інтерфейси. Зрозумілі пояснення стандартів, документація виробників і перевірені відомості про конструктивні відмінності."
 >
-  <div class="container section-page">
-    <header class="page-header">
-      <h1 class="page-title">Платформи та сумісність</h1>
-      <p class="page-intro">
-        Систематизовані дані про збройові платформи, стандарти монтажних інтерфейсів
-        та матриці сумісності. Відповідь на питання: чи підійде конкретний аксесуар
-        до вашої платформи без адаптерів.
-      </p>
-    </header>
+  <!-- =========================================================================
+       1. HERO СЕКЦІЯ (Dark Tactical Canvas)
+       ========================================================================= -->
+  <section class="platforms-hero" aria-labelledby="platforms-page-title">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="header-kicker" aria-hidden="true">
+            <span class="kicker-bar"></span>
+            <span>PLATFORMS / SYSTEMS / STANDARDS</span>
+          </div>
 
-    <div class="wip-block" role="status" aria-label="Розділ у розробці">
-      <div class="wip-inner">
-        <span class="wip-icon" aria-hidden="true">🔧</span>
-        <div>
-          <p class="wip-title">Розділ у розробці</p>
-          <p class="wip-text">
-            Довідники платформ і таблиці сумісності готуються. Тут з'являться детальні порівняння
-            стандартів M-LOK, Picatinny і KeyMod, посадкових місць для прицілів (optic footprints)
-            та огляди ключових збройових платформ.
+          <h1 id="platforms-page-title" class="hero-title">
+            Платформи та сумісність
+          </h1>
+
+          <p class="hero-lead">
+            Досліджуй сучасні збройові платформи, їхні сімейства, покоління та технічні
+            інтерфейси. Зрозумілі пояснення стандартів, документація виробників і перевірені
+            відомості про конструктивні відмінності.
+          </p>
+
+          <div class="hero-actions">
+            <a href="/encyclopedia/" class="hero-btn hero-btn-primary">
+              <span class="btn-icon" aria-hidden="true">⊞</span>
+              <span>Каталог зброї</span>
+            </a>
+            <a href="/accessories/" class="hero-btn hero-btn-secondary">
+              <span class="btn-icon" aria-hidden="true">⚙</span>
+              <span>Каталог аксесуарів</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Десктопна компактна інфо-панель з ключовими принципами -->
+        <aside class="hero-side-panel" aria-label="Базові принципи сумісності">
+          <div class="panel-header">
+            <span class="panel-kicker">ТЕХНІЧНА АРХІТЕКТУРА</span>
+            <span class="panel-badge">STANDARDS GUIDE</span>
+          </div>
+          <div class="panel-items">
+            <div class="panel-item">
+              <span class="panel-num">01</span>
+              <div>
+                <strong class="panel-term">Платформа</strong>
+                <p class="panel-desc">Базова архітектурна схема та компоновка вузлів</p>
+              </div>
+            </div>
+            <div class="panel-item">
+              <span class="panel-num">02</span>
+              <div>
+                <strong class="panel-term">Модель</strong>
+                <p class="panel-desc">Конкретний серійний виріб із фіксованими ТТХ</p>
+              </div>
+            </div>
+            <div class="panel-item">
+              <span class="panel-num">03</span>
+              <div>
+                <strong class="panel-term">Інтерфейс</strong>
+                <p class="panel-desc">Стандартизоване механічне посадкове місце</p>
+              </div>
+            </div>
+            <div class="panel-item">
+              <span class="panel-num">04</span>
+              <div>
+                <strong class="panel-term">Документація</strong>
+                <p class="panel-desc">Верифікація допусків за мануалами виробника</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       2. СЕКЦІЯ «ЩО ТАКЕ ЗБРОЙОВА ПЛАТФОРМА?» (Light Editorial Canvas)
+       ========================================================================= -->
+  <section class="section section-taxonomy" aria-labelledby="taxonomy-heading">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" aria-hidden="true">КОНЦЕПЦІЯ ТА ТЕРМІНОЛОГІЯ</div>
+        <h2 id="taxonomy-heading" class="section-heading">
+          Що таке збройова платформа?
+        </h2>
+        <p class="section-lead">
+          У збройовій індустрії нерідко виникає плутанина між загальною конструктивною платформою,
+          конкретною серійною моделлю та категорією зброї. Для коректного розуміння сумісності важливо
+          розрізняти рівні інженерної та редакційної класифікації.
+        </p>
+      </div>
+
+      <!-- Редакційне роз'яснення меж класифікації -->
+      <div class="disclaimer-banner" role="note" aria-label="Редакційне застереження щодо класифікації">
+        <div class="disclaimer-badge">РЕДАКЦІЙНА КЛАСИФІКАЦІЯ</div>
+        <p class="disclaimer-text">
+          <strong>Зверніть увагу:</strong> редакційна класифікація Firearms Explorer є структурованою
+          навчально-довідковою системою, покликаною впорядкувати технічні знання для стрільців та аналітиків,
+          і не претендує на статус формального міжнародного договору. Наприклад, не слід ототожнювати
+          <strong>AR-15</strong> як загальну відкриту платформу з конкретною заводською моделлю
+          <strong>Daniel Defense DDM4 V7</strong>, створеною за цією схемою окремим виробником.
+        </p>
+      </div>
+
+      <!-- Сітка понять: платформа, категорія, виробник, модель, покоління, модифікація -->
+      <div class="taxonomy-grid">
+        {
+          PLATFORM_TAXONOMY.map((item) => (
+            <article class="taxonomy-card">
+              <div class="card-kicker-row">
+                <span class="card-kicker">{item.englishTerm}</span>
+              </div>
+              <h3 class="taxonomy-card-title">{item.term}</h3>
+              <p class="taxonomy-card-def">{item.definition}</p>
+              <div class="taxonomy-example">
+                <span class="example-label">Приклад:</span>
+                <span class="example-text">{item.example}</span>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. СЕКЦІЯ «ОСНОВНІ ПЛАТФОРМИ ТА СІМЕЙСТВА»
+       ========================================================================= -->
+  <section class="section section-families" aria-labelledby="families-heading">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" aria-hidden="true">КОНСТРУКТИВНІ СІМЕЙСТВА</div>
+        <h2 id="families-heading" class="section-heading">
+          Основні платформи
+        </h2>
+        <p class="section-lead">
+          Ключові конструктивні родини сучасної стрілецької зброї, навколо яких формуються
+          ринки аксесуарів, компоненти модернізації та стандарти оснащення провідних армій.
+        </p>
+      </div>
+
+      <div class="families-grid">
+        {
+          PLATFORM_FAMILIES.map((fam) => (
+            <article class={`family-card ${fam.status === 'draft' ? 'family-card-draft' : ''}`}>
+              <div class="family-top">
+                <span class={`family-tag ${fam.status === 'draft' ? 'family-tag-draft' : ''}`}>
+                  {fam.tag}
+                </span>
+                {fam.status === 'draft' && (
+                  <span class="future-badge" aria-label="Статус матеріалу">
+                    Матеріал готується
+                  </span>
+                )}
+              </div>
+
+              <h3 class="family-title">{fam.title}</h3>
+              <p class="family-subtitle">{fam.subtitle}</p>
+              <p class="family-desc">{fam.description}</p>
+
+              <!-- Ключові конструктивні риси -->
+              <div class="family-attributes" aria-label="Ключові особливості">
+                {fam.keyAttributes.map((attr) => (
+                  <span class="attr-pill">{attr}</span>
+                ))}
+              </div>
+
+              <!-- Блок прикладу моделі або майбутнього матеріалу -->
+              {fam.exampleModel ? (
+                <div class="family-link-box">
+                  <div class="link-box-header">
+                    <span class="link-box-badge">МАТЕРІАЛ В ЕНЦИКЛОПЕДІЇ</span>
+                  </div>
+                  <a href={fam.exampleModel.url} class="family-model-link">
+                    <span>{fam.exampleModel.label}</span>
+                    <span class="link-arrow" aria-hidden="true">→</span>
+                  </a>
+                  <p class="family-model-note">
+                    {fam.exampleModel.note}
+                  </p>
+                </div>
+              ) : (
+                <div class="family-future-box">
+                  <span class="future-icon" aria-hidden="true">📋</span>
+                  <p class="future-text">{fam.futureNote}</p>
+                </div>
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. СЕКЦІЯ «СТАНДАРТИ ТА ІНТЕРФЕЙСИ»
+       ========================================================================= -->
+  <section class="section section-standards" aria-labelledby="standards-heading">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" aria-hidden="true">МЕХАНІЧНІ ІНТЕРФЕЙСИ МОНТАЖУ</div>
+        <h2 id="standards-heading" class="section-heading">
+          Стандарти та інтерфейси
+        </h2>
+        <p class="section-lead">
+          Механічні інтерфейси забезпечують жорстке, повторюване та безпечне кріплення оптики,
+          лазерних блоків, освітлювачів і руківʼїв. Ознайомтеся з характеристиками найбільш поширених систем.
+        </p>
+      </div>
+
+      <div class="standards-grid">
+        {
+          MECHANICAL_STANDARDS.map((std) => (
+            <article class="standard-card">
+              <div class="standard-top">
+                <span class="standard-tag">{std.tag}</span>
+              </div>
+              <h3 class="standard-title">{std.title}</h3>
+              <p class="standard-summary">{std.summary}</p>
+
+              <div class="standard-spec-block">
+                <span class="spec-block-label">ТЕХНІЧНІ ПАРАМЕТРИ ТА ІСТОРІЯ:</span>
+                <p class="standard-tech">{std.technicalDetails}</p>
+              </div>
+
+              <div class="standard-app-block">
+                <span class="spec-block-label">ОБЛАСТЬ ЗАСТОСУВАННЯ:</span>
+                <p class="standard-app">{std.application}</p>
+              </div>
+
+              {std.cautionNote && (
+                <div class="standard-caution" role="note">
+                  <span class="caution-icon" aria-hidden="true">ℹ</span>
+                  <p class="caution-text">{std.cautionNote}</p>
+                </div>
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. СЕКЦІЯ «ЯК РОЗУМІТИ СУМІСНІСТЬ ОБЛАДНАННЯ» (Editorial Advisory)
+       ========================================================================= -->
+  <section class="section section-advisory" aria-labelledby="advisory-heading">
+    <div class="container">
+      <div class="advisory-panel">
+        <div class="advisory-header">
+          <div class="section-tag" aria-hidden="true">РЕДАКЦІЙНЕ ЗАСТЕРЕЖЕННЯ</div>
+          <h2 id="advisory-heading" class="advisory-title">
+            Як правильно розуміти сумісність обладнання
+          </h2>
+          <p class="advisory-lead">
+            Сумісність деталей чи обвісу — це не просто формальний збіг назви інтерфейсу в каталозі.
+            Щоб уникнути пошкодження обладнання або нештатних затримок під час стрільби, враховуйте
+            фундаментальні інженерні аспекти:
+          </p>
+        </div>
+
+        <div class="advisory-grid">
+          <div class="advisory-item">
+            <div class="item-num" aria-hidden="true">1</div>
+            <div class="item-content">
+              <h3 class="item-title">Збіг назви не гарантує сумісності</h3>
+              <p class="item-desc">
+                Навіть якщо цівка й ліхтар заявлені як сумісні з M-LOK чи Picatinny, геометрія ствола під цівкою,
+                довжина монтажних гвинтів або ширина посадкового майданчика можуть завадити коректній установці.
+              </p>
+            </div>
+          </div>
+
+          <div class="advisory-item">
+            <div class="item-num" aria-hidden="true">2</div>
+            <div class="item-content">
+              <h3 class="item-title">Покоління мають критичні відмінності</h3>
+              <p class="item-desc">
+                Моделі різних поколінь (як-от Glock Gen3 проти Gen5) часто використовують різні посадки затвора,
+                важелі затримки та геометрію рамки, що унеможливлює сліпе перенесення компонентів.
+              </p>
+            </div>
+          </div>
+
+          <div class="advisory-item">
+            <div class="item-num" aria-hidden="true">3</div>
+            <div class="item-content">
+              <h3 class="item-title">Специфічні заводські обмеження</h3>
+              <p class="item-desc">
+                Виробники встановлюють точні моменти затягування різьбових зʼєднань (torque rating) та граничну
+                довжину гвинтів — занадто довгий гвинт коліматора на пістолетному затворі може заблокувати екстрактор.
+              </p>
+            </div>
+          </div>
+
+          <div class="advisory-item">
+            <div class="item-num" aria-hidden="true">4</div>
+            <div class="item-content">
+              <h3 class="item-title">Зовнішня схожість не дорівнює відповідності</h3>
+              <p class="item-desc">
+                Деталі сторонніх брендів можуть візуально повторювати оригінальні елементи, але мати інші технологічні
+                допуски (tolerances), що спричиняє люфти, підвищене зношування або порушення безпеки зброї.
+              </p>
+            </div>
+          </div>
+
+          <div class="advisory-item">
+            <div class="item-num" aria-hidden="true">5</div>
+            <div class="item-content">
+              <h3 class="item-title">Верифікація за офіційною документацією</h3>
+              <p class="item-desc">
+                Будь-які технічні параметри, розміри гвинтів та вимоги до монтажних пластин необхідно перевіряти
+                виключно за офіційними керівництвами з експлуатації (User Manuals) конкретних виробів.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="advisory-footer-note">
+          <p>
+            <strong>Інформаційне застереження:</strong> Firearms Explorer надає виключно довідкову
+            та освітню інформацію. Портал не публікує інструкцій із самостійного складання зброї, кустарної
+            модифікації механізмів чи обходу технічних вимог безпеки.
           </p>
         </div>
       </div>
     </div>
+  </section>
 
-    <section class="preview-categories">
-      <h2 class="preview-heading">Що буде в цьому розділі</h2>
-      <ul class="preview-list">
-        <li>Платформа AR-15 / M4 / AR-10 — Mil-Spec та комерційні стандарти</li>
-        <li>Система Glock Gen 1–5 та модульні конфігурації</li>
-        <li>Платформи SIG Sauer: MCX, Spear (NGSW), P320, P365</li>
-        <li>Платформа AK та її варіації (AKM, AK-74, АК-12)</li>
-        <li>Стандарти цівок: M-LOK (Magpul), KeyMod, MIL-STD-1913 Picatinny</li>
-        <li>Посадкові місця прицілів: RMR, Shield RMSc, Aimpoint Acro, Docter/Noblex</li>
-      </ul>
-    </section>
-  </div>
+  <!-- =========================================================================
+       6. СЕКЦІЯ «ДЖЕРЕЛА ТА ТЕХНІЧНА ДОКУМЕНТАЦІЯ»
+       ========================================================================= -->
+  <section class="section section-sources" aria-labelledby="sources-heading">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" aria-hidden="true">ТЕХНІЧНА ВЕРИФІКАЦІЯ</div>
+        <h2 id="sources-heading" class="section-heading">
+          Джерела та документація
+        </h2>
+        <p class="section-lead">
+          Офіційні військові специфікації, відкриті галузеві стандарти та керівництва виробників,
+          використані під час підготовки цього довідника:
+        </p>
+      </div>
+
+      <div class="sources-grid">
+        {
+          TECHNICAL_SOURCES.map((src) => (
+            <article class="source-card">
+              <div class="source-top">
+                <span class="source-org">{src.organization}</span>
+                {src.year && <span class="source-year">{src.year}</span>}
+              </div>
+              <h3 class="source-title">
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="source-link"
+                >
+                  <span>{src.title}</span>
+                  <span class="ext-icon" aria-hidden="true">↗</span>
+                </a>
+              </h3>
+              <p class="source-desc">{src.description}</p>
+              <div class="source-url-display" aria-hidden="true">
+                {src.url}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .section-page {
-    padding-top: clamp(2.5rem, 5vw, 4rem);
-    padding-bottom: clamp(3rem, 6vw, 5rem);
+  /* ==========================================================================
+     1. HERO СЕКЦІЯ (Dark Tactical Canvas)
+     ========================================================================== */
+  .platforms-hero {
+    background-color: var(--color-dark-canvas);
+    color: var(--color-dark-text);
+    padding-top: clamp(2.5rem, 5vw, 4.5rem);
+    padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+    border-bottom: 1px solid var(--color-dark-border);
   }
 
-  .page-header {
-    margin-bottom: clamp(2rem, 4vw, 3rem);
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: clamp(2rem, 4vw, 3.5rem);
+    }
+  }
+
+  .header-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.1em;
+    color: var(--color-amber);
+    margin-bottom: var(--space-sm);
+  }
+
+  .kicker-bar {
+    width: 20px;
+    height: 2px;
+    background-color: var(--color-amber);
+    display: inline-block;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 4vw + 0.5rem, 3.25rem);
+    font-weight: var(--weight-bold);
+    color: var(--color-dark-text);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  .hero-lead {
+    font-size: clamp(1.0625rem, 1.5vw + 0.5rem, 1.25rem);
+    color: var(--color-dark-text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-top: 0;
+    margin-bottom: var(--space-lg);
     max-width: 720px;
   }
 
-  .page-title {
-    font-size: clamp(1.75rem, 4vw, 2.75rem);
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.25rem;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .hero-btn-primary {
+    background-color: var(--color-accent);
+    color: #ffffff;
+    border: 1px solid var(--color-accent);
+  }
+
+  .hero-btn-primary:hover {
+    background-color: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
+  }
+
+  .hero-btn-primary:focus-visible {
+    outline: 2px solid var(--color-focus-dark);
+    outline-offset: 3px;
+  }
+
+  .hero-btn-secondary {
+    background-color: var(--color-dark-surface);
+    color: var(--color-dark-text);
+    border: 1px solid var(--color-dark-border);
+  }
+
+  .hero-btn-secondary:hover {
+    background-color: var(--color-dark-surface-2);
+    border-color: var(--color-accent-light);
+  }
+
+  .hero-btn-secondary:focus-visible {
+    outline: 2px solid var(--color-focus-dark);
+    outline-offset: 3px;
+  }
+
+  .btn-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  /* Бічна панель Hero */
+  .hero-side-panel {
+    background-color: var(--color-dark-surface);
+    border: 1px solid var(--color-dark-border);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    box-shadow: var(--shadow-dark-md);
+  }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-dark-border);
+  }
+
+  .panel-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    color: var(--color-dark-text-muted);
+  }
+
+  .panel-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    background-color: var(--color-amber-muted);
+    color: var(--color-amber);
+    padding: 0.15rem 0.45rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .panel-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .panel-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .panel-num {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    color: var(--color-amber);
+    line-height: 1.2;
+    padding-top: 0.1rem;
+    flex-shrink: 0;
+  }
+
+  .panel-term {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--color-dark-text);
+    margin-bottom: 0.15rem;
+  }
+
+  .panel-desc {
+    font-size: var(--text-xs);
+    color: var(--color-dark-text-secondary);
+    line-height: var(--leading-normal);
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     ЗАГАЛЬНІ ЕЛЕМЕНТИ СЕКЦІЙ
+     ========================================================================== */
+  .section {
+    padding-top: clamp(3rem, 6vw, 4.5rem);
+    padding-bottom: clamp(3rem, 6vw, 4.5rem);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .section-header {
+    max-width: 820px;
+    margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem);
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+  }
+
+  .section-heading {
+    font-size: clamp(1.65rem, 2.8vw, 2.25rem);
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.025em;
+    color: var(--color-text);
+    margin-top: 0;
+    margin-bottom: var(--space-xs);
+  }
+
+  .section-lead {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     2. ТАКСОНОМІЯ ТА ТЕРМІНОЛОГІЯ
+     ========================================================================== */
+  .disclaimer-banner {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-amber);
+    border-radius: var(--radius-md);
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .disclaimer-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.06em;
+    color: var(--color-amber);
+    margin-bottom: 0.35rem;
+  }
+
+  .disclaimer-text {
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    line-height: var(--leading-normal);
+    margin: 0;
+  }
+
+  .taxonomy-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  @media (min-width: 640px) {
+    .taxonomy-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .taxonomy-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .taxonomy-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: clamp(1.15rem, 2.2vw, 1.4rem);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .taxonomy-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-kicker-row {
+    margin-bottom: var(--space-2xs);
+  }
+
+  .card-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+  }
+
+  .taxonomy-card-title {
+    font-size: 1.125rem;
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+    margin-top: 0;
+    margin-bottom: var(--space-xs);
+    line-height: 1.3;
+  }
+
+  .taxonomy-card-def {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin-top: 0;
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .taxonomy-example {
+    background-color: var(--color-surface-subtle);
+    border-left: 2px solid var(--color-accent);
+    padding: 0.6rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    line-height: var(--leading-normal);
+  }
+
+  .example-label {
+    display: block;
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent);
+    margin-bottom: 0.15rem;
+  }
+
+  .example-text {
+    color: var(--color-text);
+  }
+
+  /* ==========================================================================
+     3. СЕКЦІЯ СІМЕЙСТВ ПЛАТФОРМ
+     ========================================================================== */
+  .section-families {
+    background-color: var(--color-surface-subtle);
+  }
+
+  .families-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .families-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .family-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .family-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+
+  .family-card-draft {
+    border-style: dashed;
+    background-color: #fafaf8;
+  }
+
+  .family-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-xs);
+  }
+
+  .family-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    background-color: var(--color-accent-muted);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .family-tag-draft {
+    color: var(--color-amber);
+    background-color: var(--color-amber-muted);
+  }
+
+  .future-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: var(--weight-bold);
+    color: var(--color-amber);
+    border: 1px solid var(--color-amber);
+    padding: 0.15rem 0.45rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .family-title {
+    font-size: 1.375rem;
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+    margin-top: 0;
+    margin-bottom: 0.2rem;
+  }
+
+  .family-subtitle {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-muted);
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  .family-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin-top: 0;
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .family-attributes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .attr-pill {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-text-secondary);
+    background-color: var(--color-surface-subtle);
+    border: 1px solid var(--color-border);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .family-link-box {
+    background-color: var(--color-surface-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm);
+  }
+
+  .link-box-header {
+    margin-bottom: 0.35rem;
+  }
+
+  .link-box-badge {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+  }
+
+  .family-model-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-bottom: 0.4rem;
+    transition: color 0.15s ease;
+  }
+
+  .family-model-link:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .family-model-link:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .link-arrow {
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+
+  .family-model-link:hover .link-arrow {
+    transform: translateX(3px);
+  }
+
+  .family-model-note {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    line-height: var(--leading-normal);
+    margin: 0;
+  }
+
+  .family-future-box {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    background-color: var(--color-surface-subtle);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm);
+  }
+
+  .future-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .future-text {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    line-height: var(--leading-normal);
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     4. СЕКЦІЯ СТАНДАРТІВ ТА ІНТЕРФЕЙСІВ
+     ========================================================================== */
+  .section-standards {
+    background-color: var(--color-bg);
+  }
+
+  .standards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .standards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .standard-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .standard-top {
+    margin-bottom: var(--space-xs);
+  }
+
+  .standard-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    background-color: var(--color-accent-muted);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .standard-title {
+    font-size: 1.25rem;
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+    margin-top: 0;
+    margin-bottom: var(--space-xs);
+    line-height: 1.3;
+  }
+
+  .standard-summary {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin-top: 0;
+    margin-bottom: var(--space-md);
+  }
+
+  .standard-spec-block,
+  .standard-app-block {
+    background-color: var(--color-surface-subtle);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 0.85rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .spec-block-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .standard-tech,
+  .standard-app {
+    font-size: var(--text-xs);
+    color: var(--color-text);
+    line-height: var(--leading-normal);
+    margin: 0;
+  }
+
+  .standard-caution {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    background-color: var(--color-amber-muted);
+    border: 1px solid rgba(217, 107, 39, 0.25);
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 0.8rem;
+    margin-top: var(--space-xs);
+  }
+
+  .caution-icon {
+    color: var(--color-amber);
+    font-weight: var(--weight-bold);
+    font-size: 0.9rem;
+    line-height: 1;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+  }
+
+  .caution-text {
+    font-size: var(--text-xs);
+    color: var(--color-text);
+    line-height: var(--leading-normal);
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     5. СЕКЦІЯ РЕДАКЦІЙНОГО РОЗʼЯСНЕННЯ СУМІСНОСТІ
+     ========================================================================== */
+  .section-advisory {
+    background-color: var(--color-surface-subtle);
+  }
+
+  .advisory-panel {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .advisory-header {
+    max-width: 820px;
+    margin-bottom: clamp(1.5rem, 3.5vw, 2.25rem);
+  }
+
+  .advisory-title {
+    font-size: clamp(1.5rem, 2.6vw, 2.125rem);
     font-weight: var(--weight-bold);
     letter-spacing: -0.02em;
     color: var(--color-text);
     margin-top: 0;
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-xs);
   }
 
-  .page-intro {
-    font-size: clamp(1rem, 2vw, 1.125rem);
-    line-height: var(--leading-relaxed);
+  .advisory-lead {
+    font-size: var(--text-base);
     color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
     margin: 0;
   }
 
-  .wip-block {
-    background-color: var(--color-surface-subtle, #f5f4f0);
-    border: 1px solid var(--color-border);
-    border-left: 4px solid var(--color-accent);
-    border-radius: var(--radius-md);
-    padding: clamp(1.25rem, 3vw, 1.75rem);
-    margin-bottom: clamp(2rem, 4vw, 3rem);
+  .advisory-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
   }
 
-  .wip-inner {
+  @media (min-width: 768px) {
+    .advisory-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .advisory-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .advisory-item {
     display: flex;
-    gap: 1rem;
+    gap: var(--space-sm);
     align-items: flex-start;
+    background-color: var(--color-surface-subtle);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    padding: clamp(1rem, 2vw, 1.25rem);
   }
 
-  .wip-icon {
-    font-size: 1.5rem;
-    line-height: 1;
+  .item-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-accent);
+    color: #ffffff;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
     flex-shrink: 0;
   }
 
-  .wip-title {
-    font-size: 1rem;
-    font-weight: var(--weight-semibold);
-    color: var(--color-text);
-    margin: 0 0 0.375rem;
+  .item-content {
+    flex-grow: 1;
   }
 
-  .wip-text {
+  .item-title {
     font-size: var(--text-sm);
-    color: var(--color-text-secondary);
-    margin: 0;
-    line-height: var(--leading-normal);
-  }
-
-  .preview-categories {
-    max-width: 640px;
-  }
-
-  .preview-heading {
-    font-size: 1.125rem;
-    font-weight: var(--weight-semibold);
+    font-weight: var(--weight-bold);
     color: var(--color-text);
     margin-top: 0;
-    margin-bottom: var(--space-sm);
+    margin-bottom: 0.35rem;
+    line-height: 1.35;
   }
 
-  .preview-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .preview-list li {
-    padding-left: 1.25rem;
-    position: relative;
-    font-size: var(--text-sm);
+  .item-desc {
+    font-size: var(--text-xs);
     color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin: 0;
+  }
+
+  .advisory-footer-note {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-md);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
     line-height: var(--leading-normal);
   }
 
-  .preview-list li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
+  .advisory-footer-note p {
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     6. СЕКЦІЯ ДЖЕРЕЛ ТА ДОКУМЕНТАЦІЇ
+     ========================================================================== */
+  .section-sources {
+    background-color: var(--color-bg);
+  }
+
+  .sources-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  @media (min-width: 640px) {
+    .sources-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .sources-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .source-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: clamp(1rem, 2vw, 1.25rem);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .source-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+
+  .source-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .source-org {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: var(--weight-bold);
     color: var(--color-accent);
-    font-weight: var(--weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .source-year {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-text-muted);
+  }
+
+  .source-title {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    margin-top: 0;
+    margin-bottom: var(--space-xs);
+    line-height: 1.35;
+  }
+
+  .source-link {
+    color: var(--color-text);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    transition: color 0.15s ease;
+  }
+
+  .source-link:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .source-link:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .ext-icon {
+    font-size: 0.85em;
+    color: var(--color-text-muted);
+  }
+
+  .source-desc {
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+    flex-grow: 1;
+  }
+
+  .source-url-display {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-text-muted);
+    word-break: break-all;
+    border-top: 1px solid var(--color-border-subtle);
+    padding-top: 0.4rem;
   }
 </style>
