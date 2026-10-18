@@ -14,8 +14,13 @@ const sourceSchema = z.object({
 const imageSchema = z.object({
   src: z.string().min(1, 'Шлях до зображення є обов’язковим'),
   alt: z.string().min(1, 'Описовий alt-текст є обов’язковим для доступності'),
-  author: z.string().min(1, 'Автор або архівний фонд є обов’язковим'),
+  author: z.string().min(1, 'Автор або правовласник є обов’язковим'),
   license: z.string().min(1, 'Тип ліцензії або правовий статус обов’язковий'),
+  sourceUrl: z.url().optional(),
+  licenseUrl: z.url().optional(),
+  caption: z.string().optional(),
+  width: z.number().int().positive().optional(),
+  height: z.number().int().positive().optional(),
 });
 
 const firearms = defineCollection({

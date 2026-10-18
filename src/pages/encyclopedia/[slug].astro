@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCategoryById } from '../../data/categories';
+import ContentImage from '../../components/ContentImage.astro';
 
 export async function getStaticPaths() {
   const firearms = await getCollection('firearms', ({ data }) => !data.draft);
@@ -86,6 +87,17 @@ const formattedReviewedDate = data.lastReviewedAt.toLocaleDateString('uk-UA', {
   <!-- 2. ОСНОВНИЙ РЕДАКЦІЙНИЙ КОНТЕНТ (Light Editorial Canvas) -->
   <div class="content-wrapper">
     <div class="container container-content">
+      <!-- Основна фотографія з атрибуцією -->
+      {data.image && (
+        <ContentImage
+          image={data.image}
+          title={data.title}
+          categoryLabel={categoryLabel}
+          mode="detail"
+          loading="eager"
+        />
+      )}
+
       <!-- Інформаційний паспорт моделі -->
       <section class="passport-section" aria-labelledby="passport-title">
         <div class="passport-card">
@@ -99,28 +111,34 @@ const formattedReviewedDate = data.lastReviewedAt.toLocaleDateString('uk-UA', {
               <dt class="passport-term">Модель</dt>
               <dd class="passport-def">{data.title}</dd>
             </div>
-            <div class="passport-row">
-              <dt class="passport-term">Оригінальна назва</dt>
-              <dd class="passport-def">{data.originalName || '—'}</dd>
-            </div>
-            <div class="passport-row">
-              <dt class="passport-term">Виробник</dt>
-              <dd class="passport-def">{data.manufacturer || '—'}</dd>
-            </div>
+            {data.originalName && (
+              <div class="passport-row">
+                <dt class="passport-term">Оригінальна назва</dt>
+                <dd class="passport-def">{data.originalName}</dd>
+              </div>
+            )}
+            {data.manufacturer && (
+              <div class="passport-row">
+                <dt class="passport-term">Виробник</dt>
+                <dd class="passport-def">{data.manufacturer}</dd>
+              </div>
+            )}
             <div class="passport-row">
               <dt class="passport-term">Категорія</dt>
               <dd class="passport-def">{categoryLabel}</dd>
             </div>
-            <div class="passport-row">
-              <dt class="passport-term">Країна походження</dt>
-              <dd class="passport-def">{data.countryOfOrigin || '—'}</dd>
-            </div>
-            <div class="passport-row">
-              <dt class="passport-term">Рік появи</dt>
-              <dd class="passport-def">
-                {data.introducedYear ? `${data.introducedYear} рік` : '—'}
-              </dd>
-            </div>
+            {data.countryOfOrigin && (
+              <div class="passport-row">
+                <dt class="passport-term">Країна походження</dt>
+                <dd class="passport-def">{data.countryOfOrigin}</dd>
+              </div>
+            )}
+            {data.introducedYear && (
+              <div class="passport-row">
+                <dt class="passport-term">Рік появи</dt>
+                <dd class="passport-def">{data.introducedYear} рік</dd>
+              </div>
+            )}
           </dl>
         </div>
       </section>
@@ -134,11 +152,11 @@ const formattedReviewedDate = data.lastReviewedAt.toLocaleDateString('uk-UA', {
       <section class="sources-section" aria-labelledby="sources-heading">
         <div class="sources-card">
           <div class="sources-header">
-            <div class="sources-kicker" aria-hidden="true">ВЕРИФІКАЦІЯ ДАНИХ</div>
-            <h2 id="sources-heading" class="sources-title">Перевірені першоджерела</h2>
+            <div class="sources-kicker" aria-hidden="true">ДЖЕРЕЛА</div>
+            <h2 id="sources-heading" class="sources-title">Джерела та редакційна перевірка</h2>
             <p class="sources-desc">
-              Усі технічні показники та відомості про модель верифіковано на основі офіційної
-              документації виробника, сертифікатів та відкритих профільних публікацій.
+              Усі технічні показники та відомості про модель зафіксовано на основі офіційної
+              документації виробника, технічних специфікацій та відкритих профільних публікацій.
             </p>
           </div>
 

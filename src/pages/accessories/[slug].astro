@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAccessoryCategoryById } from '../../data/accessoryCategories';
+import ContentImage from '../../components/ContentImage.astro';
 
 export async function getStaticPaths() {
   const accessories = await getCollection('accessories', ({ data }) => !data.draft);
@@ -86,6 +87,17 @@ const formattedReviewedDate = data.lastReviewedAt.toLocaleDateString('uk-UA', {
   <!-- 2. ОСНОВНИЙ РЕДАКЦІЙНИЙ КОНТЕНТ (Light Editorial Canvas) -->
   <div class="content-wrapper">
     <div class="container container-content">
+      <!-- Основна фотографія з атрибуцією -->
+      {data.image && (
+        <ContentImage
+          image={data.image}
+          title={data.title}
+          categoryLabel={categoryLabel}
+          mode="detail"
+          loading="eager"
+        />
+      )}
+
       <!-- Інформаційний паспорт аксесуара -->
       <section class="passport-section" aria-labelledby="passport-title">
         <div class="passport-card">
@@ -107,20 +119,24 @@ const formattedReviewedDate = data.lastReviewedAt.toLocaleDateString('uk-UA', {
               <dt class="passport-term">Категорія</dt>
               <dd class="passport-def">{categoryLabel}</dd>
             </div>
-            <div class="passport-row">
-              <dt class="passport-term">Модель або серія</dt>
-              <dd class="passport-def">{data.model || '—'}</dd>
-            </div>
-            <div class="passport-row">
-              <dt class="passport-term">Країна походження</dt>
-              <dd class="passport-def">{data.countryOfOrigin || '—'}</dd>
-            </div>
-            <div class="passport-row">
-              <dt class="passport-term">Рік появи</dt>
-              <dd class="passport-def">
-                {data.introducedYear ? `${data.introducedYear} рік` : '—'}
-              </dd>
-            </div>
+            {data.model && (
+              <div class="passport-row">
+                <dt class="passport-term">Модель або серія</dt>
+                <dd class="passport-def">{data.model}</dd>
+              </div>
+            )}
+            {data.countryOfOrigin && (
+              <div class="passport-row">
+                <dt class="passport-term">Країна походження</dt>
+                <dd class="passport-def">{data.countryOfOrigin}</dd>
+              </div>
+            )}
+            {data.introducedYear && (
+              <div class="passport-row">
+                <dt class="passport-term">Рік появи</dt>
+                <dd class="passport-def">{data.introducedYear} рік</dd>
+              </div>
+            )}
           </dl>
         </div>
       </section>
@@ -134,11 +150,11 @@ const formattedReviewedDate = data.lastReviewedAt.toLocaleDateString('uk-UA', {
       <section class="sources-section" aria-labelledby="sources-heading">
         <div class="sources-card">
           <div class="sources-header">
-            <div class="sources-kicker" aria-hidden="true">ВЕРИФІКАЦІЯ ДАНИХ</div>
-            <h2 id="sources-heading" class="sources-title">Джерела інформації</h2>
+            <div class="sources-kicker" aria-hidden="true">ДЖЕРЕЛА</div>
+            <h2 id="sources-heading" class="sources-title">Джерела та редакційна перевірка</h2>
             <p class="sources-desc">
               Технічні параметри та функціональні особливості виробу зафіксовано на основі офіційної
-              документації виробника та відкритих технічних специфікацій.
+              документації виробника, технічних специфікацій та відкритих профільних джерел.
             </p>
           </div>
 

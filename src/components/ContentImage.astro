@@ -1,0 +1,311 @@
+---
+interface ImageMeta {
+  src: string;
+  alt: string;
+  author: string;
+  license: string;
+  sourceUrl?: string;
+  licenseUrl?: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+}
+
+interface Props {
+  image?: ImageMeta;
+  title: string;
+  categoryLabel?: string;
+  mode?: 'detail' | 'card';
+  loading?: 'lazy' | 'eager';
+}
+
+const {
+  image,
+  title,
+  categoryLabel,
+  mode = 'detail',
+  loading,
+} = Astro.props;
+---
+
+{mode === 'detail' && image && (
+  <figure class="detail-media" aria-label={`Основне фото: ${title}`}>
+    <div class="detail-media-frame">
+      <img
+        src={image.src}
+        alt={image.alt}
+        width={image.width || 1200}
+        height={image.height || 675}
+        loading={loading || 'eager'}
+        decoding="async"
+        class="detail-img"
+      />
+    </div>
+    <figcaption class="detail-media-caption">
+      {image.caption && <p class="caption-text">{image.caption}</p>}
+      <div class="attribution-strip">
+        <span class="attr-item">
+          <span class="attr-label">Фото:</span> {image.author}
+        </span>
+        <span class="attr-sep" aria-hidden="true">·</span>
+        <span class="attr-item">
+          <span class="attr-label">Ліцензія:</span>
+          {image.licenseUrl ? (
+            <a
+              href={image.licenseUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="attr-link"
+            >
+              {image.license}
+            </a>
+          ) : (
+            <span>{image.license}</span>
+          )}
+        </span>
+        {image.sourceUrl && (
+          <>
+            <span class="attr-sep" aria-hidden="true">·</span>
+            <span class="attr-item">
+              <a
+                href={image.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="attr-link attr-source"
+              >
+                Першоджерело <span aria-hidden="true" class="ext-icon">↗</span>
+              </a>
+            </span>
+          </>
+        )}
+      </div>
+    </figcaption>
+  </figure>
+)}
+
+{mode === 'card' && (
+  image ? (
+    <div class="card-media">
+      <img
+        src={image.src}
+        alt={image.alt}
+        width={image.width || 600}
+        height={image.height || 338}
+        loading={loading || 'lazy'}
+        decoding="async"
+        class="card-img"
+      />
+    </div>
+  ) : (
+    <div class="card-media card-media-placeholder" aria-hidden="true">
+      <div class="placeholder-grid"></div>
+      <div class="placeholder-content">
+        <svg
+          class="placeholder-icon"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="9" stroke-dasharray="3 3" />
+          <line x1="12" y1="2" x2="12" y2="6" />
+          <line x1="12" y1="18" x2="12" y2="22" />
+          <line x1="2" y1="12" x2="6" y2="12" />
+          <line x1="18" y1="12" x2="22" y2="12" />
+          <circle cx="12" cy="12" r="2" fill="currentColor" />
+        </svg>
+        {categoryLabel && <span class="placeholder-tag">{categoryLabel}</span>}
+        <span class="placeholder-note">Фото очікує верифікації</span>
+      </div>
+    </div>
+  )
+)}
+
+<style>
+  /* ==========================================================================
+     DETAIL VIEW (Детальна сторінка)
+     ========================================================================== */
+  .detail-media {
+    margin: 0 0 clamp(2rem, 4vw, 3rem) 0;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .detail-media-frame {
+    width: 100%;
+    max-height: 480px;
+    background-color: #0d1117;
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 0.4) 0%, rgba(13, 17, 23, 0.95) 100%),
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 24px 24px, 24px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 2.5vw, 2rem);
+  }
+
+  .detail-img {
+    display: block;
+    max-width: 100%;
+    max-height: 420px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4));
+  }
+
+  .detail-media-caption {
+    padding: 0.875rem clamp(1rem, 2.5vw, 1.5rem);
+    background-color: var(--color-surface-subtle);
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+  }
+
+  .caption-text {
+    margin: 0 0 0.375rem 0;
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-snug);
+  }
+
+  .attribution-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.6875rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+  }
+
+  .attr-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .attr-label {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+  }
+
+  .attr-sep {
+    color: var(--color-border-strong);
+    user-select: none;
+  }
+
+  .attr-link {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .attr-link:hover {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+  }
+
+  .attr-link:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  .ext-icon {
+    font-size: 0.625rem;
+  }
+
+  /* ==========================================================================
+     CARD VIEW (Картка каталогу)
+     ========================================================================== */
+  .card-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #0e1217;
+    background-image: radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 0.5) 0%, rgba(14, 18, 23, 0.95) 100%);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: var(--space-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.75rem;
+    transition: transform 0.2s ease;
+  }
+
+  :global(.firearm-card:hover) .card-img,
+  :global(.accessory-card:hover) .card-img {
+    transform: scale(1.02);
+  }
+
+  .card-media-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface-subtle);
+    border: 1px dashed var(--color-border);
+  }
+
+  .placeholder-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(var(--color-border-subtle) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-border-subtle) 1px, transparent 1px);
+    background-size: 16px 16px;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .placeholder-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.375rem;
+    text-align: center;
+    padding: 0.75rem;
+  }
+
+  .placeholder-icon {
+    color: var(--color-accent);
+    opacity: 0.75;
+  }
+
+  .placeholder-tag {
+    font-size: 0.6875rem;
+    font-family: var(--font-mono);
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .placeholder-note {
+    font-size: 0.625rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
+  }
+</style>

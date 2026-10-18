@@ -17,6 +17,16 @@ sources:
     year: 2021
 lastReviewedAt: 2026-10-17
 draft: false
+image:
+  src: "/images/firearms/daniel-defense-ddm4-v7.webp"
+  alt: "Карабін Daniel Defense DDM4 V7 на базі платформи AR-15"
+  author: "Steve7c8"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:DDM4V7_right_side.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  caption: "Daniel Defense DDM4 V7 (конфігурація з оптичним прицілом LPVO та камуфляжним покриттям)"
+  width: 1400
+  height: 494
 ---
 
 ## Огляд моделі
