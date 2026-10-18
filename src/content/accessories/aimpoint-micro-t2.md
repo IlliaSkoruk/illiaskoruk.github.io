@@ -13,16 +13,6 @@ sources:
     year: 2024
 lastReviewedAt: 2026-10-17
 draft: false
-image:
-  src: "/images/accessories/aimpoint-micro-t2.webp"
-  alt: "Коліматорний приціл Aimpoint Micro T-2"
-  author: "Pilimosify / Peter Ozberg"
-  license: "CC BY-SA 4.0"
-  sourceUrl: "https://commons.wikimedia.org/wiki/File:Aimpoint_Micro_T-2.jpg"
-  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
-  caption: "Коліматорний рефлекторний приціл Aimpoint Micro T-2"
-  width: 1200
-  height: 801
 ---
 
 ## Огляд

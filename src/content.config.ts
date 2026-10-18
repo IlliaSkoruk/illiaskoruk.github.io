@@ -19,6 +19,7 @@ const imageSchema = z.object({
   sourceUrl: z.url().optional(),
   licenseUrl: z.url().optional(),
   caption: z.string().optional(),
+  modifications: z.string().optional(),
   width: z.number().int().positive().optional(),
   height: z.number().int().positive().optional(),
 });

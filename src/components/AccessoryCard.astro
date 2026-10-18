@@ -29,7 +29,7 @@ const categoryLabel = categoryObj ? categoryObj.name : data.category;
     )}
   </div>
 
-  <a href={`/accessories/${accessory.id}/`} class="card-media-link" tabindex="-1" aria-hidden="true">
+  <div class="card-media-wrapper">
     <ContentImage
       image={data.image}
       title={data.title}
@@ -37,7 +37,7 @@ const categoryLabel = categoryObj ? categoryObj.name : data.category;
       mode="card"
       loading="lazy"
     />
-  </a>
+  </div>
 
   <div class="card-body">
     {data.brand && (
@@ -122,22 +122,9 @@ const categoryLabel = categoryObj ? categoryObj.name : data.category;
     flex-shrink: 0;
   }
 
-  .card-media-link {
-    display: block;
-    text-decoration: none;
-    color: inherit;
+  .card-media-wrapper {
     margin-bottom: var(--space-xs);
     border-radius: var(--radius-md);
-    transition: opacity 0.15s ease;
-  }
-
-  .card-media-link:hover {
-    opacity: 0.95;
-  }
-
-  .card-media-link:focus-visible {
-    outline: 2px solid var(--color-focus);
-    outline-offset: 2px;
   }
 
   .card-body {

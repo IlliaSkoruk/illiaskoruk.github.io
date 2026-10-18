@@ -24,7 +24,8 @@ image:
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:DDM4V7_right_side.jpg"
   licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
-  caption: "Daniel Defense DDM4 V7 (конфігурація з оптичним прицілом LPVO та камуфляжним покриттям)"
+  caption: "Daniel Defense DDM4 V7 (індивідуальна конфігурація власника з оптичним прицілом LPVO та самостійно нанесеним маскувальним покриттям; не є стандартною заводською комплектацією)"
+  modifications: "Адаптовано для вебу: змінено масштаб з 2677px до 1400px ширини, оптимізовано та конвертовано у формат WebP."
   width: 1400
   height: 494
 ---
